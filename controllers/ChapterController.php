@@ -2,7 +2,7 @@
 
 // controllers/ChapterController.php
 
-require_once 'models/Chapter.php';
+require_once __DIR__ .'\\..\\models\\Chapter.php';
 
 class ChapterController
 {
@@ -40,7 +40,7 @@ class ChapterController
         $chapter = $this->getChapter($id);
 
         if ($chapter) {
-            include 'view/chapter.php'; // Charge la vue pour le chapitre
+            include '\\view\\chapter.php'; // Charge la vue pour le chapitre
         } else {
             // Si le chapitre n'existe pas, redirige vers un chapitre par défaut ou affiche une erreur
             header('HTTP/1.0 404 Not Found');

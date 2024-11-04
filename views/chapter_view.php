@@ -1,7 +1,9 @@
 <?php
 // view/chapter.php
+include_once __DIR__."\\..\\controllers\\ChapterController.php";
+$chapterController = new ChapterController();
 
-$chapter = $chapterController->getChapter($chapterId);
+$chapter = $chapterController->getChapter($_GET['chapter']);
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +21,7 @@ $chapter = $chapterController->getChapter($chapterId);
     <ul>
         <?php foreach ($chapter->getChoices() as $choice): ?>
             <li>
-                <a href="index.php?chapter=<?php echo $choice['chapter']; ?>">
+                <a href="chapter_view.php?chapter=<?php echo $choice['chapter']; ?>">
                     <?php echo $choice['text']; ?>
                 </a>
             </li>
