@@ -33,6 +33,25 @@ class ChapterController
             ]
         );
 
+        $this->chapters[] = new Chapter(
+            3,
+            "MORT",
+            "un sanglier est devant vous !",
+            __DIR__ ."\\image\\Wild boar.jpg",
+            [
+                ["text" => "recommencer", "chapter" => 1]
+            ]
+        );
+
+        $this->chapters[] = new Chapter(
+            4,
+            "NOYADE",
+            "bluoblubobuulmobulb",
+            "image/noyade.jpg",
+            [
+                ["text" => "recommencer", "chapter" => 1]
+            ]
+        );
     }
 
     public function show($id)
