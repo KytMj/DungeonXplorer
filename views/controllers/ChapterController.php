@@ -3,20 +3,22 @@
 // controllers/ChapterController.php
 
 require_once "./../models/Chapter.php";
-include "./../core/Database.php";
 include "./../core/pdo_agile.php";
 
 
 class ChapterController
 {
+    // private $conn = OuvrirConnexionPDO($_SESSION['dbHost'], $_SESSION['dbName'], $_SESSION['dbUser'], $_SESSION['dbPassword']);
     private $chapters = [];
-
+    
     public function __construct()
     {
+        require("./../core/Database.php");
         // Exemple de chapitres avec des images
         $tab = [];
-        LireDonneesPDO2($_SESSION['db'], 
+        LireDonneesPDO2($db, 
         "select * from Chapter", $tab);
+        print_r($tab);
         
         // $this->chapter[] = new Chapter(
 
