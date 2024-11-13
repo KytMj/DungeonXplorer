@@ -1,3 +1,18 @@
+drop table Class;
+drop table Items;
+drop table Loot;
+drop table Trasures;
+drop table Monster;
+drop table hero;
+drop table Level;
+drop table Chapter;
+drop table Encounter;
+drop table Inventory;
+drop table Links;
+drop table Chapter_Treasure;
+drop table Quest;
+
+
 -- Création de la table Class (Classe des personnages)
 CREATE TABLE Class (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -139,7 +154,7 @@ CREATE TABLE Quest (
 );
 
 
----------------------CHAPTERS---------------------------------------------------------------------------
+-- -------------------CHAPTERS---------------------------------------------------------------------------
 insert into Chapter values (1, "Chapitre 1 : Introduction
 Le ciel est lourd ce soir sur le village du Val Perdu, dissimulé entre les montagnes. La
 petite taverne, dernier refuge avant l'immense forêt, est étrangement calme quand le
@@ -224,7 +239,7 @@ insert into Chapter values (11, "Chapitre 11 : La curiosité tua le chat
 Qu’avez-vous fait, Malheureux !", null, null);
 
 
------------------------------------LINKS-----------------------------------------------------
+-- ---------------------------------LINKS-----------------------------------------------------
 insert into Links values (1, 1, 2, "Continuer");
 
 insert into Links values (2, 2, 3, "Emprunter le chemin sinueux");
@@ -248,16 +263,16 @@ insert into Links values (12, 7, 9, "Choisir de suivre le chemin tortueux à tra
 insert into Links values (13, 8, 9, "Ignorer cette curiosité et poursuivre votre route");
 insert into Links values (14, 8, 11, "Toucher la pierre gravée");
 
---9
+-- 9
 
---10
+-- 10
 
 insert into Links values (15, 10, 1, "C'est reparti !!!");
 
 insert into Links values (16, 11, 10, "Voir le sort qui vous attend...");
 
 
----------------------------------MONSTER---------------------------------------------------------
+-- -------------------------------MONSTER---------------------------------------------------------
 insert into Monster values (1, "sanglier", 30, 0, 2, 3, "charge", 1, 50 );
 
 insert into Monster values (2, "loup", 15, 0, 20, 2, "frostbite", 2, 30);
@@ -270,14 +285,14 @@ insert into items values (1, "défences de sanglier", "valent beacoup d'or");
 
 insert into items values (2, "peau de loup", "peut être utilisée comme cape");
 
-----------------------------------CLASSES----------------------------------------------------------
+-- --------------------------------CLASSES----------------------------------------------------------
 insert into class values (1, "guerrier", "tape fort avec beaucoup de points de vie mais manque d'initiative et de mana.", 30, 0, 5, 5, 5);
 insert into class values (2, "voleur", "rempli de malice il tape fort avec une grande initiative mais manque de points de vie mais et de mana.", 20, 0, 4, 50, 7);
 insert into class values (3, "magicien", "mistère ????(il a juste du mana)", 20, 200, 1, 15, 3);
 
-----------------------------------LEVELS--------------------------------------------------------------
---non
+-- --------------------------------LEVELS--------------------------------------------------------------
+-- non
 
---------------------------------encounters------------------------------------------------------------
-insert into encounters values (1, 4, 1);  --sanglier et chapitre 4
+-- ------------------------------encounters------------------------------------------------------------
+insert into encounters values (1, 4, 1);  -- sanglier et chapitre 4
 insert into encounters values (2, 6, 2); -- chapitre 6 et loup
