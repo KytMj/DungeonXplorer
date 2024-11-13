@@ -18,12 +18,14 @@ $dbHost = $env['DB_HOST'];
 $dbName = $env['DB_NAME'];
 $dbUser = $env['DB_USER'];
 $dbPassword = $env['DB_PASSWORD'];
+$db;
 
 try {
     // Connexion à la base de données
     $db = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8", $dbUser, $dbPassword);
     // Définition des attributs de PDO pour afficher les erreurs
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $_SESSION['db'] = $db;
 } catch (PDOException $e) {
     echo "Erreur de connexion à la base de données : " . $e->getMessage();
     exit;

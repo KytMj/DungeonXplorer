@@ -2,16 +2,30 @@
 
 // controllers/ChapterController.php
 
-require_once __DIR__ .'\\..\\models\\Chapter.php';
-require_once
+require_once "./../models/Chapter.php";
+include "./../core/pdo_agile.php";
+
 
 class ChapterController
 {
+    // private $conn = OuvrirConnexionPDO($_SESSION['dbHost'], $_SESSION['dbName'], $_SESSION['dbUser'], $_SESSION['dbPassword']);
     private $chapters = [];
-
+    
     public function __construct()
     {
+        require("./../core/Database.php");
         // Exemple de chapitres avec des images
+        $tab = [];
+        LireDonneesPDO2($db, 
+        "select * from Chapter", $tab);
+        echo "<pre>";
+        print_r($tab);  
+        echo "</pre>";
+        
+        // $this->chapter[] = new Chapter(
+
+        // );
+
         $this->chapters[] = new Chapter(
             1,
             "La Forêt Enchantée",
@@ -38,7 +52,7 @@ class ChapterController
             3,
             "MORT",
             "un sanglier est devant vous !",
-            __DIR__ ."\\image\\Wild boar.jpg",
+            "./../image/Wild boar.jpg",
             [
                 ["text" => "recommencer", "chapter" => 1]
             ]
@@ -60,7 +74,7 @@ class ChapterController
         $chapter = $this->getChapter($id);
 
         if ($chapter) {
-            include '\\view\\chapter.php'; // Charge la vue pour le chapitre
+            include '/view/chapter.php'; // Charge la vue pour le chapitre
         } else {
             // Si le chapitre n'existe pas, redirige vers un chapitre par défaut ou affiche une erreur
             header('HTTP/1.0 404 Not Found');
