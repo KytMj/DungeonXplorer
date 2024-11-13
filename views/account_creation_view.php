@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create your character</title>
+
+
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="../assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/style_connexion.css" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+</head>
+
+<body class="bg-connexion">
+  <div class="container py-4 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-7">
+        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+          <div class="card-body p-3 text-center">
+            <form id="monFormulaire" name="monFormulaire" action="./../controllers/account_creation_controller.php" method="post"
+              enctype="application/x-www-form-urlencoded">
+              <div class="pb-4 m-1">
+                <!--<a class="navbar-brand text-brand" href="../site.php"><img class="logo" src="../Images/logo.png"
+                      alt="logo"></a>-->
+                <h2 class="fw-bold mb-2 text-uppercase">Créez votre compte</h2>
+                <p class="text-white-50 mb-5">Veuillez bien respecter les instructions</p>
+
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input type="text" id="nom" name="nom" size="20" value="" class="form-control form-control-lg"
+                    placeholder="Nom" pattern="[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]*"
+                    required />
+                  <label for="nom" class="form-label text-white-50">Ne pas taper d'espaces ou autres caractères
+                    spéciaux</label>
+                </div>
+
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input type="text" id="prenom" name="prenom" size="20" value="" class="form-control form-control-lg"
+                    placeholder="Prénom" pattern="[A-Za-zàèìòùÀÈÌÒÙáéíóúýÁÉÍÓÚÝâêîôûÂÊÎÔÛãñõÃÑÕäëïöüÿÄËÏÖÜŸçÇßØøÅåÆæœ]*"
+                    required>
+                  <label for="prenom" class="form-label text-white-50">Ne pas taper d'espaces ou autres caractères
+                    spéciaux</label>
+                </div>
+
+                <div data-mdb-input-init class="form-outline form-white mb-4">
+                  <input type="text" id="mail" name="mail" size="20" value="" placeholder="Adresse mail"
+                    class="form-control form-control-lg" pattern="^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$"
+                    required>
+                  <label for="mail" class="form-label text-white-50">e.g : (john.doe@gmail.com)</label>
+                </div>
+
+                <div>
+                  <input type="password" id="code" name="code" size="20" class="form-control form-control-lg"
+                    placeholder="Mot de passe" AUTOCOMPLETE=OFF
+                    pattern="^(?:(?:(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]))|(?:(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))|(?:(?=.*[0-9])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))|(?:(?=.*[0-9])(?=.*[a-z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))).{8,32}$"
+                    required>
+                  <label for="mdp" class="form-label text-white-50">Majuscules, minuscules, chiffres, caractères
+                    spéciaux, entre 8 et 32 caractères</label>
+                </div>
+                <!--<input type="submit" name="BtSub" value="Créer un compte">-->
+                <div class="pt-3">
+                  <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5"
+                    type="submit" name="BtSub" value="">
+                    Créer le compte
+                  </button>
+                </div>
+              </div>
+              <div>
+                <p class="mb-0">Vous avez déjà un compte ?
+                  <a href="connection_view.php" class="text-white-50 fw-bold">Se
+                    connecter</a>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
