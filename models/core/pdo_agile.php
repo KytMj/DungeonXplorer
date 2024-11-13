@@ -4,7 +4,6 @@
 	// pdo_agile.php 11/10/2016
 
 //---------------------------------------------------------------------------------------------
-
 function OuvrirConnexionPDO($db,$db_username,$db_password)
 {
 	try
