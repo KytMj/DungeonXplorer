@@ -1,3 +1,18 @@
+drop table Class;
+drop table Items;
+drop table Loot;
+drop table Trasures;
+drop table Monster;
+drop table hero;
+drop table Level;
+drop table Chapter;
+drop table Encounter;
+drop table Inventory;
+drop table Links;
+drop table Chapter_Treasure;
+drop table Quest;
+
+
 -- Création de la table Class (Classe des personnages)
 CREATE TABLE Class (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -84,12 +99,12 @@ CREATE TABLE Level (
 );
 
 -- Création de la table Chapter (Chapitres de l'histoire)
-CREATE TABLE Chapter (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    content TEXT NOT NULL,
-    image VARCHAR(255),
-    treasure_id INT, -- Relation avec Treasure
-    FOREIGN KEY (treasure_id) REFERENCES Treasure(id)
+CREATE TABLE `Chapter` (
+  id int(11) NOT NULL,
+  Titre text NOT NULL DEFAULT 'Titre',
+  content text NOT NULL,
+  image varchar(255) DEFAULT NULL,
+  treasure_id int(11) DEFAULT NULL
 );
 
 -- Création de la table Encounter (Rencontres dans les chapitres)
@@ -139,8 +154,8 @@ CREATE TABLE Quest (
 );
 
 
----------------------CHAPTERS---------------------------------------------------------------------------
-insert into Chapter values (1, "Chapitre 1 : Introduction
+-- -------------------CHAPTERS---------------------------------------------------------------------------
+insert into Chapter values (1, "Introduction","
 Le ciel est lourd ce soir sur le village du Val Perdu, dissimulé entre les montagnes. La
 petite taverne, dernier refuge avant l'immense forêt, est étrangement calme quand le
 bourgmestre s’approche de vous. Homme d’apparence usée par les années et les soucis,
@@ -151,58 +166,58 @@ Depuis des mois, des jeunes filles disparaissent… J'ai besoin de vous pour la 
 Vous sentez le poids de la mission qui s’annonce, et un frisson parcourt votre échine.
 Bientôt, la forêt s'ouvre devant vous, sombre et menaçante. La quête commence.", "Village01.jpg", NULL);
 
-insert into Chapter values (2, "Chapitre 2 : L'orée de la forêt
-Vous franchissez la lisière des arbres, la pénombre de la forêt avalant le sentier devant
+insert into Chapter values (2, "L'orée de la forêt",
+"Vous franchissez la lisière des arbres, la pénombre de la forêt avalant le sentier devant
 vous. Un vent froid glisse entre les troncs, et le bruissement des feuilles ressemble à un
 murmure menaçant. Deux chemins s’offrent à vous : l’un sinueux, bordé de vieux arbres
 noueux ; l’autre droit mais envahi par des ronces épaisses.", "brambleTrails01.jpg", NULL);
 
-insert into Chapter values (3, "Chapitre 3 : L'arbre aux corbeaux
-Votre choix vous mène devant un vieux chêne aux branches tordues, grouillant de
+insert into Chapter values (3, "L'arbre aux corbeaux",
+"Votre choix vous mène devant un vieux chêne aux branches tordues, grouillant de
 corbeaux noirs qui vous observent en silence. À vos pieds, des traces de pas légers,
 probablement récents, mènent plus loin dans les bois. Soudain, un bruit de pas feutrés
 se fait entendre. Vous ressentez la présence d’un prédateur.", "Dark Forest02.jpg", NULL);
 
-insert into Chapter values (4,"Chapitre 4 : Le sanglier enragé
-En progressant, le calme de la forêt est soudain brisé par un grognement. Surgissant des
+insert into Chapter values (4,"Le sanglier enragé",
+"En progressant, le calme de la forêt est soudain brisé par un grognement. Surgissant des
 buissons, un énorme sanglier, au pelage épais et aux yeux injectés de sang, se dirige vers
 vous. Sa rage est palpable, et il semble prêt à en découdre. Le voici qui décide
 brutalement de vous charger !", "Wild boar.jpg", NULL);
 
-insert into Chapter values (5,"Chapitre 5 : Rencontre avec le paysan
-Tandis que vous progressez, une voix humaine s’élève, interrompant le silence de la forêt.
+insert into Chapter values (5,"Rencontre avec le paysan",
+"Tandis que vous progressez, une voix humaine s’élève, interrompant le silence de la forêt.
 Vous tombez sur un vieux paysan, accroupi près de champignons aux couleurs vives. Il
 sursaute en vous voyant, puis se détend, vous souriant tristement.
 « Vous devriez faire attention, étranger, murmure-t-il. La nuit, des cris terrifiants
 retentissent depuis le cœur de la forêt… Des créatures rôdent. »","OldMan01.jpg",NULL);
 
-insert into Chapter values (6,"Chapitre 6 : Le loup noir
-À mesure que vous avancez, un bruissement attire votre attention. Une silhouette sombre
+insert into Chapter values (6,"Le loup noir",
+"À mesure que vous avancez, un bruissement attire votre attention. Une silhouette sombre
 s’élance soudainement devant vous : un loup noir aux yeux perçants. Son poil est hérissé
 et sa gueule laisse entrevoir des crocs acérés. Vous sentez son regard fixé sur vous, prêt
 à bondir.
 Le combat est inévitable", "Wolf01.jpg",NULL);
 
-insert into Chapter values (7, "Chapitre 7 : La clairière aux pierres anciennes
-Après votre rencontre, vous atteignez une clairière étrange, entourée de pierres dressées,
+insert into Chapter values (7, "La clairière aux pierres anciennes",
+"Après votre rencontre, vous atteignez une clairière étrange, entourée de pierres dressées,
 comme un ancien autel oublié par le temps. Une légère brume rampe au sol, et les
 ombres des pierres semblent danser sous la lueur de la lune.",  "StoneWall01.jpg" , NULL );
 
-insert into Chapter values (8, "Chapitre 8 : Les murmures du ruisseau
-Essoufflé mais déterminé, vous arrivez près d’un petit ruisseau qui serpente au milieu des
+insert into Chapter values (8, "Les murmures du ruisseau",
+"Essoufflé mais déterminé, vous arrivez près d’un petit ruisseau qui serpente au milieu des
 arbres. Le chant de l’eau vous apaise quelque peu, mais des murmures étranges
 semblent émaner de la rive. Vous apercevez des inscriptions anciennes gravées dans une
 pierre moussue.", "StoneWall02.jpg",NULL);
 
-insert into Chapter values (9, "Chapitre 9 : Au pied du château
-La forêt se disperse enfin, et devant vous se dresse une colline escarpée. Au sommet, le
+insert into Chapter values (9, "Au pied du château",
+"La forêt se disperse enfin, et devant vous se dresse une colline escarpée. Au sommet, le
 château en ruines projette une ombre menaçante sous le clair de lune. Les murs effrités
 et les tours en partie effondrées ajoutent à la sinistre réputation du lieu.
 Vous sentez que la véritable aventure commence ici, et que l’influence du sorcier n’est
 peut-être pas qu’une légende…", "DarkCastle02.jpg", NULL);
 
-insert into Chapter values (10, "Chapitre 10 : La lumière au bout du néant
-Le monde se dérobe sous vos pieds, et une obscurité profonde vous enveloppe, glaciale
+insert into Chapter values (10, "La lumière au bout du néant",
+"Le monde se dérobe sous vos pieds, et une obscurité profonde vous enveloppe, glaciale
 et insondable. Vous ne sentez plus le poids de votre équipement, ni la morsure de la
 douleur. Juste un vide infini, vous aspirant lentement dans les ténèbres.
 Alors que vous perdez toute notion du temps, une lueur douce apparaît au loin, vacillante
@@ -224,7 +239,7 @@ insert into Chapter values (11, "Chapitre 11 : La curiosité tua le chat
 Qu’avez-vous fait, Malheureux !", null, null);
 
 
------------------------------------LINKS-----------------------------------------------------
+-- ---------------------------------LINKS-----------------------------------------------------
 insert into Links values (1, 1, 2, "Continuer");
 
 insert into Links values (2, 2, 3, "Emprunter le chemin sinueux");
@@ -248,36 +263,36 @@ insert into Links values (12, 7, 9, "Choisir de suivre le chemin tortueux à tra
 insert into Links values (13, 8, 9, "Ignorer cette curiosité et poursuivre votre route");
 insert into Links values (14, 8, 11, "Toucher la pierre gravée");
 
---9
+-- 9
 
---10
+-- 10
 
 insert into Links values (15, 10, 1, "C'est reparti !!!");
 
 insert into Links values (16, 11, 10, "Voir le sort qui vous attend...");
 
 
----------------------------------MONSTER---------------------------------------------------------
-insert into Monster values (1, "sanglier", 30, 0, 2, 3, "charge", 1, 50 );
+-- -------------------------------MONSTER---------------------------------------------------------
+insert into Items values (1, "défences de sanglier", "valent beacoup d'or");
 
-insert into Monster values (2, "loup", 15, 0, 20, 2, "frostbite", 2, 30);
+insert into Items values (2, "peau de loup", "peut être utilisée comme cape");
 
 insert into Loot values(1, "récompenses du sanglier", 1, 2);
 
 insert into Loot values (2, "récompenses du loup", 2, 1);
 
-insert into items values (1, "défences de sanglier", "valent beacoup d'or");
+insert into Monster values (1, "sanglier", 30, 0, 2, 3, "charge", 1, 50 );
 
-insert into items values (2, "peau de loup", "peut être utilisée comme cape");
+insert into Monster values (2, "loup", 15, 0, 20, 2, "frostbite", 2, 30);
 
-----------------------------------CLASSES----------------------------------------------------------
-insert into class values (1, "guerrier", "tape fort avec beaucoup de points de vie mais manque d'initiative et de mana.", 30, 0, 5, 5, 5);
-insert into class values (2, "voleur", "rempli de malice il tape fort avec une grande initiative mais manque de points de vie mais et de mana.", 20, 0, 4, 50, 7);
-insert into class values (3, "magicien", "mistère ????(il a juste du mana)", 20, 200, 1, 15, 3);
+-- --------------------------------CLASSES----------------------------------------------------------
+insert into Class values (1, "guerrier", "tape fort avec beaucoup de points de vie mais manque d'initiative et de mana.", 30, 0, 5, 5, 5);
+insert into Class values (2, "voleur", "rempli de malice il tape fort avec une grande initiative mais manque de points de vie mais et de mana.", 20, 10, 4, 50, 7);
+insert into Class values (3, "magicien", "une classe très variée avec beaucoup d'options mais des stats réduites", 20, 30, 1, 15, 3);
 
-----------------------------------LEVELS--------------------------------------------------------------
---non
+-- --------------------------------LEVELS--------------------------------------------------------------
+-- non
 
---------------------------------encounters------------------------------------------------------------
-insert into encounters values (1, 4, 1);  --sanglier et chapitre 4
-insert into encounters values (2, 6, 2); -- chapitre 6 et loup
+-- ------------------------------encounters------------------------------------------------------------
+insert into Encounter values (1, 4, 1);  -- sanglier et chapitre 4
+insert into Encounter values (2, 6, 2); -- chapitre 6 et loup
