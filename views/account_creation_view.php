@@ -8,14 +8,48 @@
     
     <body>
         <header>
-        <nav>
-                <img src="./../image/Logo.png" alt="Logo Dungeon Xplorer"/>
-                <a href="account_creation_view.php"><button type="button" id="NewAccountButton">Créer un compte</button></a>
-                <a href="connection_view.php"><button type="button" id="LogInButton" onclick="">Se connecter</button></a>
+            <nav>
+                <a href="home"><img src="./../image/Logo.png" class="img-fluid" style="width: 150px; height: 150px;" alt="Logo Dungeon Xplorer" /></a>
+                <a href="signin"><button type="button" id="NewAccountButton">Créer un compte</button></a>
+                <a href="connexion"><button type="button" id="LogInButton" onclick="">Se connecter</button></a>
             </nav>
         </header>
         <main>
-            <h1>Créer un compte</h1>
+            <div>
+                <form id="monFormulaire" name="monFormulaire" action="inscription_site.php" method="post" enctype="application/x-www-form-urlencoded">
+                        <div>
+                            <h2>Créez votre compte</h2>
+                        </div>
+        
+                        <div>
+                            <input type="text" id="mail" name="mail" size="20" value="" placeholder="Adresse mail" pattern="^((?!\.)[\w\-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$"
+                            required>
+                            <label for="mail">e.g : (john.doe@gmail.com)</label>
+                        </div>
+        
+                        <div>
+                            <input type="password" id="code" name="code" size="20"
+                            placeholder="Mot de passe" AUTOCOMPLETE=OFF
+                            pattern="^(?:(?:(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]))|(?:(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))|(?:(?=.*[0-9])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))|(?:(?=.*[0-9])(?=.*[a-z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))).{8,32}$"
+                            required>
+                            <label for="mdp">Majuscules, minuscules, chiffres, caractères spéciaux, entre 8 et 32 caractères</label>
+                        </div>
+
+                        <div>
+                            <input type="password" id="code" name="code" size="20"
+                            placeholder="Confirmer le mot de passe" AUTOCOMPLETE=OFF
+                            pattern="^(?:(?:(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]))|(?:(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))|(?:(?=.*[0-9])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))|(?:(?=.*[0-9])(?=.*[a-z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))).{8,32}$"
+                            required>
+                            <label for="mdp">Majuscules, minuscules, chiffres, caractères spéciaux, entre 8 et 32 caractères</label>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" name="BtSub" value=""> Valider </button>
+                        </div>
+                        
+                        <a href="connexion">Vous avez déjà un compte ?</a>
+                </form>
+            </div>
         </main>
     </body>
 </html>

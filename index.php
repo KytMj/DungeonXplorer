@@ -70,12 +70,18 @@ class Router
 }
 
 // Instanciation du routeur
-$router = new Router('DungeonXplorer');
+$router = new Router('zMaelys');
 
 // Ajout des routes
 $router->addRoute('', 'HomeController@index'); // Pour la racine
-$router->addRoute('creer_un_compte', 'AccountCreationController@index'); // Pour la racine
-$router->addRoute('connection', 'ConnectionController@index');
+$router->addRoute('home', 'HomeController@index');
+$router->addRoute('signin', 'AccountCreationController@index');
+$router->addRoute('connexion', 'ConnectionController@index');
+$router->addRoute('chapter', 'ChapterController@index');
+$router->addRoute('character', 'CharacterController@index');
+$router->addRoute('herocreation', 'HeroCreationController@index');
+$router->addRoute('adventurefight', 'AventureCombatController@index');
+$router->addRoute('account', 'AccountController@index');
 
 
 // Appel de la méthode route
