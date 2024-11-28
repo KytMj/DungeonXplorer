@@ -1,6 +1,6 @@
 <?php
 // view/chapter.php
-include_once __DIR__."\\..\\controllers\\ChapterController.php";
+include_once "./../controllers/ChapterController.php";
 $chapterController = new ChapterController();
 
 $chapter = $chapterController->getChapter($_GET['chapter']);
