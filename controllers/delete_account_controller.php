@@ -23,7 +23,6 @@ $conn = OuvrirConnexionPDO($db,$db_username,$db_password);
 // Suppression 
 $sql = "delete from user where usr_num = " . $per_num;
 $res = majDonneesPDO($conn, $sql);
-
 majDonneesPDO($conn, "commit");
 
 

@@ -13,7 +13,7 @@
             </nav>
         </header>
         <main>
-            <h1>COMPTE</h1>
+            <h1>COMBAT</h1>
         </main>
     </body>
 </html>

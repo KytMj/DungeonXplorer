@@ -1,5 +1,4 @@
 <?php
-header("Location: ./../Profil/profil.php");
 session_start();
 function afficherObj($obj)
 	{
@@ -32,11 +31,6 @@ else $mail = $_POST["mail"];
 if(is_null($_POST["code"])) $erreur = true;
 else $mdp = $_POST["code"];
 
-// calcul per_num
-$sql = "SELECT MAX(USR_NUM) as MX from USER";
-LireDonneesPDO1($conn, $sql, $tab);
-
-$per_num = $tab[0]['MX'] + 1;
 
 
 // insertion sql
@@ -48,10 +42,10 @@ if ($erreur == false )
         }
         else {
 
-            $_SESSION['num_utilisateur'] = $per_num;
-            $_SESSION['nom'] = $nom;
-            $_SESSION['prenom'] = $prenom;
-            $sql = "INSERT INTO USER(USR_NUM, USR_MDP, USR_NOM, USR_PRENOM, USR_MAIL) VALUES ($per_num,'$mdp','".$nom."','".$prenom."','".$mail."')";
+            $_SESSION['usr_num'] = $per_num;
+            $_SESSION['usr_nom'] = $nom;
+            $_SESSION['usr_prenom'] = $prenom;
+            $sql = "INSERT INTO DGX_USER(usr_firstname, usr_lastname, usr_mail, usr_password) VALUES ('".$prenom."','".$nom."', '".$mail."', '$mdp',)";
 		
         
             $res = majDonneesPDO($conn,$sql);
