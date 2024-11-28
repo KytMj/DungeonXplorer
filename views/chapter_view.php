@@ -1,9 +1,25 @@
 <?php
 // view/chapter.php
 include_once "./../controllers/ChapterController.php";
-$chapterController = new ChapterController();
+include_once "./../models/Inventory.php";
+include_once "./../models/Item.php";
 
-$chapter = $chapterController->getChapter($_GET['chapter']);
+$chapterController = new ChapterController();
+if (isset($_POST['chapter'])){
+    $chapter = $chapterController->getChapter($_POST['chapter']);
+}
+else{
+    $chapter = $chapterController->getChapter(1);
+}
+$inventory = new Inventory();
+$inventory->add(new Item("pouler", "aaah"));
+$inventory->add(new Item("b", "aaah"));
+$inventory->add(new Item("a", "aaah"));
+$inventory->add(new Item("c", "aaah"));
+$inventory->add(new Item("d", "aaah"));
+$inventory->add(new Item("e", "aaah"));
+$inventory->add(new Item("f", "aaah"));
+$inventory->add(new Item("g", "aaah"));
 ?>
 
 <!DOCTYPE html>
@@ -11,6 +27,7 @@ $chapter = $chapterController->getChapter($_GET['chapter']);
 <head>
     <meta charset="UTF-8">
     <title><?php echo $chapter->getTitle(); ?></title>
+    <link rel="stylesheet" href="./css/inventory.css">
 </head>
 <body>
     <h1><?php echo $chapter->getTitle(); ?></h1>
@@ -21,11 +38,25 @@ $chapter = $chapterController->getChapter($_GET['chapter']);
     <ul>
         <?php foreach ($chapter->getChoices() as $choice): ?>
             <li>
-                <a href="chapter_view.php?chapter=<?php echo $choice['chapter']; ?>">
-                    <?php echo $choice['text']; ?>
-                </a>
+                <form id="chapterForm" action="chapter_view.php" method="POST">
+                    <input type="hidden" name="chapter" value="<?php echo $choice['chapter']; ?>">
+                    <button type="submit">
+                        <?php echo $choice['text']; ?>
+                    </button>
+                </form>
             </li>
         <?php endforeach; ?>
     </ul>
+    <div class="popup" onclick="showInventory()">
+        Inventory
+        <?php foreach ($inventory->getInventory() as $index => $item) :?>
+            
+            <div class="popuptext" id="inventory-<?php echo $index; ?>">
+                <?php echo ($item->getName()) ?>
+            </div>
+        <?php endforeach ?>
+        </div>
+    </div>
+    <script src="./js/inventory.js"></script>
 </body>
 </html>

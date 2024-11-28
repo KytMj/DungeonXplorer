@@ -26,16 +26,17 @@ class ChapterController
         foreach($tab as $chapter){
             $choices = [];
             foreach($links as $l){ 
-                if ($l['chapter_id'] == $chapter['id']){
-                    array_push($choices, ["text" => $l['description'], "chapter" => $l['next_chapter_id']]);
+                if ($l['cha_id'] == $chapter['cha_id']){
+                    array_push($choices, ["text" => $l['lin_description'], "chapter" => $l['lin_id']]);
+                    echo($chapter['cha_id']);
                 }
             }
                       
             $this->chapters[] = new Chapter(
-            $chapter['id'],
-            $chapter['Titre'],
-            $chapter['content'],
-            $chapter['image'],
+            $chapter['cha_id'],
+            $chapter['cha_titre'],
+            $chapter['cha_content'],
+            $chapter['cha_image'],
             $choices
             );
             
