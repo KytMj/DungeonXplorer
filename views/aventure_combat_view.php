@@ -7,11 +7,7 @@
     </head>
     
     <body>
-        <header>
-            <nav>
-                <a href="home"><img src="./../image/Logo.png" class="img-fluid" style="width: 150px; height: 150px;" alt="Logo Dungeon Xplorer" /></a>
-            </nav>
-        </header>
+        <?php include_once 'header.php'?>
         <main>
             <h1>COMBAT</h1>
         </main>
