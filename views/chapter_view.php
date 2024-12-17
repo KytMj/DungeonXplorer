@@ -6,14 +6,7 @@ $chapterController = new ChapterController();
 $chapter = $chapterController->getChapter($_GET['chapter']);
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title><?php echo $chapter->getTitle(); ?></title>
-    </head>
-    <body>
-        <?php include_once 'header.php'?>
+<?php require_once 'header.php'?>
         <main>
             <h1><?php echo $chapter->getTitle(); ?></h1>
             <img src="<?php echo  $chapter->getImage(); ?>" alt="Image de chapitre" style="max-width: 100%; height: auto;">

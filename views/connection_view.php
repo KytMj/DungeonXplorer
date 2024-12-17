@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dungeon Xplorer - Connexion</title>
-    </head>
-    
-    <body>
-        <?php include_once 'header.php'?>
+<?php require_once 'header.php'?>
         <main>
             <div>
                 <form id="monFormulaire" name="monFormulaire" action="inscription_site.php" method="post" enctype="application/x-www-form-urlencoded">

@@ -83,6 +83,8 @@ $router->addRoute('herocreation', 'HeroCreationController@index');
 $router->addRoute('adventurefight', 'AventureCombatController@index');
 $router->addRoute('account', 'AccountController@index');
 
+$router->addRoute('addAAccountInTheBase', 'AccountCreationController@inscription');
 
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));
+?>
