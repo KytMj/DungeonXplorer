@@ -10,16 +10,11 @@ if (isset($_POST['chapter'])){
 }
 else{
     $chapter = $chapterController->getChapter(1);
+
 }
 $inventory = new Inventory();
-$inventory->add(new Item("pouler", "aaah"));
-$inventory->add(new Item("b", "aaah"));
-$inventory->add(new Item("a", "aaah"));
-$inventory->add(new Item("c", "aaah"));
-$inventory->add(new Item("d", "aaah"));
-$inventory->add(new Item("e", "aaah"));
-$inventory->add(new Item("f", "aaah"));
-$inventory->add(new Item("g", "aaah"));
+$inventory->add(new Item("pouler", "aaah", 0));
+
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +51,11 @@ $inventory->add(new Item("g", "aaah"));
             </div>
         <?php endforeach ?>
         </div>
+    </div>
+    <div>
+        <?php
+        include './hero_view.php';
+        ?>
     </div>
     <script src="./js/inventory.js"></script>
 </body>

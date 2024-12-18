@@ -3,7 +3,7 @@
 // controllers/ChapterController.php
 
 require_once "./../models/Chapter.php";
-include "./../core/pdo_agile.php";
+include_once "./../core/pdo_agile.php";
 
 
 class ChapterController
@@ -27,8 +27,7 @@ class ChapterController
             $choices = [];
             foreach($links as $l){ 
                 if ($l['cha_id'] == $chapter['cha_id']){
-                    array_push($choices, ["text" => $l['lin_description'], "chapter" => $l['lin_id']]);
-                    echo($chapter['cha_id']);
+                    array_push($choices, ["text" => $l['lin_description'], "chapter" => $l['next_cha_id']]);
                 }
             }
                       
@@ -42,47 +41,6 @@ class ChapterController
             
         }
 
-        // $this->chapters[] = new Chapter(
-        //     1,
-        //     "La Forêt Enchantée",
-        //     "Vous vous trouvez dans une forêt sombre et enchantée. Deux chemins se présentent à vous.",
-        //     "images/forêt.jpg", // Chemin vers l'image
-        //     [
-        //         ["text" => "Aller à gauche", "chapter" => 2],
-        //         ["text" => "Aller à droite", "chapter" => 3]
-        //     ]
-        // );
-
-        // $this->chapters[] = new Chapter(
-        //     2,
-        //     "Le Lac Mystérieux",
-        //     "Vous arrivez à un lac aux eaux limpides. Une créature vous observe.",
-        //     "images/lac.jpg", // Chemin vers l'image
-        //     [
-        //         ["text" => "Nager dans le lac", "chapter" => 4],
-        //         ["text" => "Faire demi-tour", "chapter" => 1]
-        //     ]
-        // );
-
-        // $this->chapters[] = new Chapter(
-        //     3,
-        //     "MORT",
-        //     "un sanglier est devant vous !",
-        //     "./../image/Wild boar.jpg",
-        //     [
-        //         ["text" => "recommencer", "chapter" => 1]
-        //     ]
-        // );
-
-        // $this->chapters[] = new Chapter(
-        //     4,
-        //     "NOYADE",
-        //     "bluoblubobuulmobulb",
-        //     "image/noyade.jpg",
-        //     [
-        //         ["text" => "recommencer", "chapter" => 1]
-        //     ]
-        // );
     }
 
     public function show($id)
