@@ -80,6 +80,7 @@ $router->addRoute('connexion', 'ConnectionController@index');
 $router->addRoute('chapter', 'ChapterController@index');
 $router->addRoute('character', 'CharacterController@index');
 $router->addRoute('herocreation', 'HeroCreationController@index');
+$router->addRoute('adventure', 'AventureController@index');
 $router->addRoute('adventurefight', 'AventureCombatController@index');
 $router->addRoute('account', 'AccountController@index');
 

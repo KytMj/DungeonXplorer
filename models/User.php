@@ -9,7 +9,8 @@ class User{
     {
         $this->id = $id;
         $this->mail = $mail;
-        $this->passwd = $passwd;
+        $hache = password_hash($passwd, PASSWORD_DEFAULT);
+        $this->passwd = $hache;
     }
 
     public function getId()
@@ -27,8 +28,9 @@ class User{
         return $this->passwd;
     }
 
-    public function insert($mail, $passwd){
-        
+    public function insert($bdd){
+        $sql = "INSERT INTO user (user_mail, user_passwd) VALUES ('".$this->mail."', '".$this->passwd."')";
+        majDonneesPDO($bdd,$sql);
     }
 }
 

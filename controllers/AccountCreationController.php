@@ -35,8 +35,7 @@ class AccountCreationController {
             $data['conf_mdp'] = htmlspecialchars($data['conf_mdp']);
 
             /*si tout est okay, envoie données au modèle pour insérer les données dans la table*/ 
-
-            //$hache = password_hash($passwd, PASSWORD_DEFAULT);
+            header("adventure");
         }
     }
 }
