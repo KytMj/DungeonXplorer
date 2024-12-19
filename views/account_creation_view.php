@@ -1,7 +1,7 @@
 <?php require_once 'header.php'?>
         <main>
             <div>
-                <form id="monFormulaire" name="monFormulaire" action="addAAccountInTheBase" method="post" enctype="application/x-www-form-urlencoded">
+                <form id="monFormulaire" name="monFormulaire" action="addAccount" method="post" enctype="application/x-www-form-urlencoded">
                         <div>
                             <h2>Créez votre compte</h2>
                         </div>
