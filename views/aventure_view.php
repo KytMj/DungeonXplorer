@@ -12,6 +12,7 @@
         
         <script>
             // Si l'utilisateur est connecté
+            // LireDonneesPDO1($conn,$sql,&$tab)
             let resumeAdventure = document.getElementById('resumeAdventure');
             resumeAdventure.style.display='none';
         </script>
