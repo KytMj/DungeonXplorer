@@ -2,10 +2,10 @@
     abstract class Combattant{
         protected $name;
         protected $initiative;
-        private $strength;
-        private $armor;
-        private $mana;
-        private $pv;
+        protected $strength;
+        protected $armor;
+        protected $pv;
+        protected $pvMax;
 
 
         public function getName(){
@@ -23,6 +23,12 @@
             $defence = rand(1,6) + (int)($this->strength/2) + $this->armor;
             $degats = max(0, $damages - $defence);
             $this->pv -= $degats;
+        }
+        public function isDead(){
+            return !($this->pv > 0);
+        }
+        public function getPV(){
+            return $this->pv;
         }
 
     }
