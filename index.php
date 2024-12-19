@@ -70,7 +70,7 @@ class Router
 }
 
 // Instanciation du routeur
-$router = new Router('DungeonXplorer');
+$router = new Router('zCassandre');
 
 // Ajout des routes
 $router->addRoute('', 'HomeController@index'); // Pour la racine

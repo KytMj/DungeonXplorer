@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /DungeonXplorer/
+RewriteBase /zCassandre/
 
 # Ne pas réécrire les requêtes pour les fichiers existants ou les répertoires
 # RewriteCond %{REQUEST_FILENAME} !-f
