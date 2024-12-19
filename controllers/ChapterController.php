@@ -22,7 +22,6 @@ class ChapterController
         LireDonneesPDO2($db, 
         "select * from Links", $links);
 
-
         foreach($tab as $chapter){
             $choices = [];
             foreach($links as $l){ 
@@ -40,7 +39,6 @@ class ChapterController
             );
             
         }
-
     }
 
     public function show($id)

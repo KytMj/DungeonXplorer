@@ -1,5 +1,4 @@
 <?php
-
 require_once "./../models/User.php";
 include "./../core/pdo_agile.php";
 

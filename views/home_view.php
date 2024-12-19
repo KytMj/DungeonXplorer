@@ -11,7 +11,6 @@
                     Nous sommes enthousiastes de partager avec vous cette application et espérons qu'elle saura vous  plonger au cœur des mystères du Val Perdu !</p>
                 <a href="signin"><button type="button" id="NewAccountButton">Commencer l'Aventure</button></a>
             </div>
-
         </main>
     </body>
 </html>

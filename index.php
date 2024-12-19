@@ -27,7 +27,6 @@ class Router
         if ($this->prefix && strpos($url, $this->prefix) === 0) {
             $url = substr($url, strlen($this->prefix) + 1);
         }
-
         // Enlève les barres obliques en trop
         $url = trim($url, '/');
 
@@ -66,6 +65,21 @@ class Router
 
         // Si aucune route n'a été trouvée, gérer l'erreur 404
         require_once 'views/404.php';
+        // Suppression des barres obliques en trop
+        $url = trim($url, '/');
+
+        // Vérification de la correspondance de l'URL à une route définie
+        if (array_key_exists($url, $this->routes)) {
+            // Extraction du nom du contrôleur et de la méthode
+            list($controllerName, $methodName) = explode('@', $this->routes[$url]);
+
+            // Instanciation du contrôleur et appel de la méthode
+            $controller = new $controllerName();
+            $controller->$methodName();
+        } else {
+            // Gestion des erreurs (page 404, etc.)
+            echo '<h2>la page demandée n\'existe pas</h2>';
+        }
     }
 }
 
