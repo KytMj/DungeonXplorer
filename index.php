@@ -84,11 +84,7 @@ class Router
 }
 
 // Instanciation du routeur
-<<<<<<< HEAD
 $router = new Router('zCassandre');
-=======
-$router = new Router('zMaelys');
->>>>>>> main
 
 // Ajout des routes
 $router->addRoute('', 'HomeController@index'); // Pour la racine
