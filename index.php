@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -62,24 +62,11 @@ class Router
                 }
             }
         }
+        $_SESSION['erreur'] = "Erreur 404 : cette page n'existe pas.";
 
         // Si aucune route n'a été trouvée, gérer l'erreur 404
         require_once 'views/404.php';
-        // Suppression des barres obliques en trop
-        $url = trim($url, '/');
-
-        // Vérification de la correspondance de l'URL à une route définie
-        if (array_key_exists($url, $this->routes)) {
-            // Extraction du nom du contrôleur et de la méthode
-            list($controllerName, $methodName) = explode('@', $this->routes[$url]);
-
-            // Instanciation du contrôleur et appel de la méthode
-            $controller = new $controllerName();
-            $controller->$methodName();
-        } else {
-            // Gestion des erreurs (page 404, etc.)
-            echo '<h2>la page demandée n\'existe pas</h2>';
-        }
+        
     }
 }
 
@@ -99,6 +86,8 @@ $router->addRoute('adventurefight', 'AventureCombatController@index');
 $router->addRoute('account', 'AccountController@index');
 
 $router->addRoute('addAccount', 'AccountCreationController@inscription');
+$router->addRoute('connexionAccount', 'ConnectionController@connexion');
+$router->addRoute('deconnexionAccount', 'ConnectionController@deconnexion');
 
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));
