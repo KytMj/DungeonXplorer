@@ -1,5 +1,7 @@
 <?php
 
+include_once "./core/pdo_agile.php";
+
 class User{
     private $id;
     private $mail;
@@ -7,9 +9,9 @@ class User{
 
     public function __construct($id, $mail, $passwd)
     {
+        $hache = password_hash($passwd, PASSWORD_DEFAULT);
         $this->id = $id;
         $this->mail = $mail;
-        $hache = password_hash($passwd, PASSWORD_DEFAULT);
         $this->passwd = $hache;
     }
 
@@ -28,9 +30,10 @@ class User{
         return $this->passwd;
     }
 
-    public function insert($bdd){
-        $sql = "INSERT INTO user (user_mail, user_passwd) VALUES ('".$this->mail."', '".$this->passwd."')";
-        majDonneesPDO($bdd,$sql);
+    public function insert(){
+        require("./core/Database.php");
+        $sql = "INSERT INTO User VALUES ('".$this->id."','".$this->mail."', '".$this->passwd."')";
+        majDonneesPDO($db,$sql);
     }
 }
 
