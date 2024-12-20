@@ -1,5 +1,4 @@
 <?php
-
 include_once "./core/pdo_agile.php";
 
 class User{

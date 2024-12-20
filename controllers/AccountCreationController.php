@@ -3,44 +3,53 @@ require_once "./models/User.php";
 include_once "./core/pdo_agile.php";
 
 class AccountCreationController {
-    private $users = [];
 
     public function index() {
         require_once 'views/account_creation_view.php';
-    }
-    
-    public function __construct()
-    {    
-        require("./core/Database.php");
-        // Exemple de chapitres avec des images
-        $tab = [];
-        LireDonneesPDO2($db, "select * from User", $tab);
-
-
-        foreach($tab as $user){    
-            $this->users[] = new User(
-                $user['user_id'],
-                $user['user_mail'],
-                $user['user_passwd']
-            );
-        }
     }
 
     public function inscription(){    
         require("./core/Database.php");
         $data = $_POST;
         if(isset($data['submit'])){
-            $data['mail'] = htmlspecialchars($data['mail']);
-            $data['mdp'] = htmlspecialchars($data['mdp']);
-            $data['conf_mdp'] = htmlspecialchars($data['conf_mdp']);
+            if((isset($data['mail']) && !empty($data['mail'])) 
+            && (isset($data['mdp']) && !empty($data['mdp'])) 
+            && (isset($data['conf_mdp']) && !empty($data['conf_mdp']))){
+                if($data['conf_mdp'] != $data['mdp']){
+                    $erreur = 'Les deux mots de passe sont différents.';
+                    $_SESSION['erreur'] = $erreur;
+                    require_once 'views/404.php';
+                    exit();
+                }
 
-            /*si tout est okay, envoie données au modèle pour insérer les données dans la table*/ 
-            $id = [];
-            LireDonneesPDO2($db, "select MAX(user_id) as max from User", $id);
+                $tab = [];
+                LireDonneesPDO2($db, "select count(*) as nb from User where user_mail = '".$data['mail']."'", $tab);
 
-            $newUser = new User($id[0]['max']+1, $data['mail'], $data['mdp']);
-            $newUser->insert();
-            require_once 'views/aventure_view.php';
+                if($tab[0]['nb'] == 0){
+                    $data['mail'] = htmlspecialchars($data['mail']);
+                    $data['mdp'] = htmlspecialchars($data['mdp']);
+                    $data['conf_mdp'] = htmlspecialchars($data['conf_mdp']);
+
+                    $id = [];
+                    LireDonneesPDO2($db, "select MAX(user_id) as max from User", $id);
+
+                    $newUser = new User($id[0]['max']+1, $data['mail'], $data['mdp']);
+                    $newUser->insert();
+                    if(isset($_SESSION['login'])){
+                        $deconnexion = new ConnectionController();
+                        $deconnexion->deconnexion();
+                    }
+                    $_SESSION['login'] = strval($newUser->getMail());
+                    require_once 'views/aventure_view.php';
+                    exit();
+                }
+                else{
+                    $erreur = 'Un compte existe déjà.';
+                    $_SESSION['erreur'] = $erreur;
+                    require_once 'views/404.php';
+                    exit();
+                }
+            }
         }
     }
 }

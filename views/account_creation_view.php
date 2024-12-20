@@ -30,7 +30,7 @@
                         </div>
                         
                         <div>
-                            <button type="submit" name="submit" value=""> Valider </button>
+                            <button type="submit" name="submit" value="Submit"> Valider </button>
                         </div>
                         
                         <a href="connexion">Vous avez déjà un compte ?</a>

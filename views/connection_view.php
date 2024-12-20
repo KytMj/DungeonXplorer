@@ -1,7 +1,7 @@
 <?php require_once 'header.php'?>
         <main>
             <div>
-                <form id="monFormulaire" name="monFormulaire" action="inscription_site.php" method="post" enctype="application/x-www-form-urlencoded">
+                <form id="monFormulaire" name="monFormulaire" action="connexionAccount" method="post" enctype="application/x-www-form-urlencoded">
                         <div>
                             <h2>Se connecter</h2>
                         </div>
@@ -13,7 +13,7 @@
                         </div>
         
                         <div>
-                            <input type="password" id="code" name="code" size="20"
+                            <input type="password" id="mdp" name="mdp" size="20"
                             placeholder="Mot de passe" AUTOCOMPLETE=OFF
                             pattern="^(?:(?:(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]))|(?:(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))|(?:(?=.*[0-9])(?=.*[A-Z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))|(?:(?=.*[0-9])(?=.*[a-z])(?=.*[*.!@$%^&(){}[]:;<>,.?/~_+-=|\]))).{8,32}$"
                             required>
@@ -21,7 +21,7 @@
                         </div>
                         
                         <div>
-                            <button type="submit" name="BtSub" value=""> Connexion </button>
+                            <button type="submit" name="submit" value=""> Connexion </button>
                         </div>
 
                         <a href="signin">Vous n'avez pas de compte ? Créez-en un !</a>
