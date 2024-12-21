@@ -18,7 +18,7 @@ class AventureController {
             }
             require_once 'views/aventure_view.php';  
         }else{
-            $erreur = "Connectez-vous ou créez-vous un compte avant de partir à l'aventure !";
+            $erreur = "Connectez-vous ou créez un compte avant de partir à l'aventure !";
             $_SESSION['erreur'] = $erreur;
             require_once 'views/404.php';
         }
