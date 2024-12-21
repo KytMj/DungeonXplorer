@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dungeon Xplorer</title>
-    </head>
-    
-    <body>
-        <header>
-            <nav>
-                <img src="./image/Logo.png" alt="Logo Dungeon Xplorer"/>
-                <a href="./views/account_creation_view.php"><button type="button" id="NewAccountButton">Créer un compte</button></a>
-                <a href="./views/connection_view.php"><button type="button" id="LogInButton" onclick="">Se connecter</button></a>
-            </nav>
-        </header>
+<?php require_once 'header.php'?>
         <main>
             <h1>Bienvenue sur la page de Dungeon Xplorer !</h1>
             <div class="description">
@@ -24,9 +9,8 @@
                     Dans sa première version, DungeonXplorer permettra aux joueurs de créer un personnage parmi trois  classes emblématiques 
                     — guerrier, voleur, magicien — et d’évoluer dans un scénario captivant, tout en  assurant à chacun la possibilité de conserver sa progression.
                     Nous sommes enthousiastes de partager avec vous cette application et espérons qu'elle saura vous  plonger au cœur des mystères du Val Perdu !</p>
-                <a href="./views/account_creation_view.php"><button type="button" id="NewAccountButton">Commencer l'Aventure</button></a>
+                <a href="<?php if(isset($_SESSION['login'])){ echo 'adventure'; }else{ echo 'signin';}?>"><button type="button" id="NewAccountButton">Commencer l'Aventure</button></a>
             </div>
-
         </main>
     </body>
 </html>
