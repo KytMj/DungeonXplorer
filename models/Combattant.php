@@ -31,4 +31,8 @@
             return $this->pv;
         }
 
+        public function setPV($value){
+            $this->pv = $value;
+        }
+
     }

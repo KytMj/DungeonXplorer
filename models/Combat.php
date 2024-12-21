@@ -13,9 +13,9 @@ require_once __DIR__ . "/Monster.php";
             $this->hero =$hero;
         }
         public function quiCommence (){
-            $val = $this->monster->getInitiative() - $this->hero->getInitiative();
-            if ($val < 1) return $this->monster;
-            return $this->hero;
+            $val = $this->monster->getInitiative() - $this->hero->getInitiative();  
+            if ($val < 0) return 0;
+            return 1;
         }
         public function heroJoue(){
             $this->monster->defend($this->hero->attaque());
@@ -34,5 +34,11 @@ require_once __DIR__ . "/Monster.php";
             return $this->monster;
         }
 
+        public function setHeroH($value){
+            $this->hero->setPV($value);
+        }
+        public function setMonsterH($value){
+            $this->monster->setPV($value);
+        }
 
     }
