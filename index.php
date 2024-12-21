@@ -71,7 +71,7 @@ class Router
 }
 
 // Instanciation du routeur
-$router = new Router('merge');
+$router = new Router('zMaelys');
 
 // Ajout des routes
 $router->addRoute('', 'HomeController@index'); // Pour la racine
@@ -88,6 +88,8 @@ $router->addRoute('account', 'AccountController@index');
 $router->addRoute('addAccount', 'AccountCreationController@inscription');
 $router->addRoute('connexionAccount', 'ConnectionController@connexion');
 $router->addRoute('deconnexionAccount', 'ConnectionController@deconnexion');
+$router->addRoute('modifMailAccount', 'AccountController@modifMail');
+$router->addRoute('modifMDPAccount', 'AccountController@modifMDP');
 
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));

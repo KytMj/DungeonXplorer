@@ -11,4 +11,7 @@ class AccountController {
         require_once 'views/account_view.php';
     }
 
+    public function modifMail(){}
+
+    public function modifMDP(){}
 }
