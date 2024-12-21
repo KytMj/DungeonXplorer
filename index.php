@@ -91,8 +91,4 @@ $router->addRoute('deconnexionAccount', 'ConnectionController@deconnexion');
 
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));
-
-if(isset($_SESSION['login'])){
-    
-}
 ?>
