@@ -31,10 +31,11 @@ class ChapterController
             }
                       
             $this->chapters[] = new Chapter(
-            $chapter['id'],
-            $chapter['Titre'],
-            $chapter['content'],
-            $chapter['image'],
+            $chapter['chap_id'],
+            $chapter['chap_title'],
+            $chapter['chap_content'],
+            $chapter['chap_image'],
+            $chapter['chap_XpGained'],
             $choices
             );
             

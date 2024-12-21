@@ -71,7 +71,7 @@ class Router
 }
 
 // Instanciation du routeur
-$router = new Router('zMaelys');
+$router = new Router('merge');
 
 // Ajout des routes
 $router->addRoute('', 'HomeController@index'); // Pour la racine
