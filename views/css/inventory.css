@@ -1,0 +1,57 @@
+/* Popup container */
+.popup {
+  position: relative; /* Keep the container's position relative */
+  display: flex; /* Use flexbox to arrange the child elements */
+  flex-direction: column; /* Stack child elements vertically */
+  gap: 10px; /* Add gap between each popuptext element */
+  cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+  visibility: hidden;
+  width: 160px;
+  max-width: 200px; /* Ensure the popup doesn't stretch too wide */
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 12px; /* More padding to avoid content sticking to the edges */
+  box-sizing: border-box;
+  display: flex; /* Use flex to center the content inside each popup */
+  flex-direction: column; /* Stack content inside each popup */
+  justify-content: center; /* Vertically center the content */
+  align-items: center; /* Horizontally center the content */
+  overflow: hidden; /* Prevent overflow if content is too large */
+  text-overflow: ellipsis; /* Truncate text if it's too long */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+  /* Popup arrow */
+  /* .popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  } */
+  
+  /* Toggle this class when clicking on the popup container (hide and show the popup) */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+  }
+  
+  /* Add animation (fade in the popup) */
+  @-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+  @keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+  }

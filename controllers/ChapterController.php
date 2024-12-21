@@ -3,7 +3,7 @@
 // controllers/ChapterController.php
 
 require_once "./../models/Chapter.php";
-include "./../core/pdo_agile.php";
+include_once "./../core/pdo_agile.php";
 
 
 class ChapterController
@@ -25,17 +25,16 @@ class ChapterController
         foreach($tab as $chapter){
             $choices = [];
             foreach($links as $l){ 
-                if ($l['chapter_id'] == $chapter['id']){
-                    array_push($choices, ["text" => $l['description'], "chapter" => $l['next_chapter_id']]);
+                if ($l['cha_id'] == $chapter['cha_id']){
+                    array_push($choices, ["text" => $l['lin_description'], "chapter" => $l['next_cha_id']]);
                 }
             }
                       
             $this->chapters[] = new Chapter(
-            $chapter['chap_id'],
-            $chapter['chap_title'],
-            $chapter['chap_content'],
-            $chapter['chap_image'],
-            $chapter['chap_XpGained'],
+            $chapter['cha_id'],
+            $chapter['cha_titre'],
+            $chapter['cha_content'],
+            $chapter['cha_image'],
             $choices
             );
             

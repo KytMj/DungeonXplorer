@@ -1,9 +1,19 @@
 <?php
 // view/chapter.php
 include_once "./../controllers/ChapterController.php";
-$chapterController = new ChapterController();
+include_once "./../models/Inventory.php";
+include_once "./../models/Item.php";
 
-$chapter = $chapterController->getChapter($_GET['chapter']);
+$chapterController = new ChapterController();
+if (isset($_POST['chapter'])){
+    $chapter = $chapterController->getChapter($_POST['chapter']);
+}
+else{
+    $chapter = $chapterController->getChapter(1);
+
+}
+$inventory = new Inventory();
+$inventory->add(new Item("pouler", "aaah", 0));
 ?>
 
 <?php require_once 'header.php'?>
