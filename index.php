@@ -88,6 +88,8 @@ $router->addRoute('account', 'AccountController@index');
 $router->addRoute('addAccount', 'AccountCreationController@inscription');
 $router->addRoute('connexionAccount', 'ConnectionController@connexion');
 $router->addRoute('deconnexionAccount', 'ConnectionController@deconnexion');
+$router->addRoute('userherocreation', 'HeroCreationController@creation');
+
 
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));
