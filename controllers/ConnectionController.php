@@ -33,7 +33,7 @@ class ConnectionController {
 
                             $user = new User($id[0]['user_id'], $data['mail'], $data['mdp']);
                             $_SESSION['login'] = strval($user->getMail());
-                            $_SESSION['chapter'] = intval($numChapter[0]['chap_id']);
+                            $_SESSION['chapter'] = $numChapter[0]['chap_id'];
                             require_once 'views/aventure_view.php';
                         }
                         else{
@@ -61,6 +61,18 @@ class ConnectionController {
     }
 
     public function deconnexion(){
+        require("./core/Database.php");
+        $id = [];
+        LireDonneesPDO2($db, "select user_id from User where user_mail = '".$_SESSION['login']."'", $id);
+
+        echo $_SESSION['chapter'];
+        $dataQuest = [];
+        LireDonneesPDO2($db, "select * from Quest where user_id = '".$id[0]['user_id']."'", $dataQuest);
+        $quest = new Quest($dataQuest[0]['hero_id'], $dataQuest[0]['user_id'], $dataQuest[0]['chap_id'], $dataQuest[0]['ques_currentPV'], $dataQuest[0]['ques_currentMana']);
+
+        //CHANGER PV ET MANA quand combat mis en place
+        $quest->update($_SESSION['chapter'], $quest->getQuestPv(), $quest->getQuestMana());
+        
         session_unset();
         session_destroy();
         require_once 'views/home_view.php';

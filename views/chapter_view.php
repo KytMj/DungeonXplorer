@@ -6,11 +6,11 @@ include_once "./models/Item.php";
 
 $chapterController = new ChapterController();
 if (isset($_POST['submit'])){
+    $_SESSION['chapter'] = $_POST['submit'];
     $chapter = $chapterController->getChapter($_POST['submit']);
 }
 else{
-    $chapter = $chapterController->getChapter(1);
-
+    $chapter = $chapterController->getChapter($_SESSION['chapter']);
 }
 $inventory = new Inventory();
 $inventory->add(new Item("pouler", "aaah", 0));

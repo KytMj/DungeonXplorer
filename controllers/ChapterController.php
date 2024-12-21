@@ -11,7 +11,6 @@ class ChapterController
     private $chapters = [];
 
     public function index() {
-        $_SESSION['chapter'] = intval(substr($_SERVER['REQUEST_URI'], -1));
         require_once 'views/chapter_view.php';
     }
     
