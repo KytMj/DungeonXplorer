@@ -11,11 +11,11 @@
         </main>
         
         <script>
-            // Si l'utilisateur est connecté
-            // LireDonneesPDO1($conn,$sql,&$tab)
-            let resumeAdventure = document.getElementById('resumeAdventure');
-            resumeAdventure.style.display='none';
+            var quest = <?php echo json_encode($quest); ?>;
+            if(quest == false){
+                let resumeAdventure = document.getElementById('resumeAdventure');
+                resumeAdventure.style.display='none';
+            }
         </script>
     </body>
 </html>
-
