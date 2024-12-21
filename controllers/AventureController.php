@@ -11,7 +11,7 @@ class AventureController {
             $tab = [];
             LireDonneesPDO2($db, "select count(*) as nb from Quest where user_id = 
                 ( select user_id from User where user_mail = '".$_SESSION['login']."')", $tab);
-            if(tab[0] >= 1){
+            if($tab[0]['nb'] >= 1){
                 $quest = true;
             }else{
                 $quest = false;
