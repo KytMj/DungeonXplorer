@@ -28,8 +28,12 @@ class ConnectionController {
                             $id = [];
                             LireDonneesPDO2($db, "select user_id from User where user_mail = '".$data['mail']."'", $id);
 
+                            $numChapter = [];
+                            LireDonneesPDO2($db, "select chap_id from Quest where user_id = '".$id[0]['user_id']."'", $numChapter);
+
                             $user = new User($id[0]['user_id'], $data['mail'], $data['mdp']);
                             $_SESSION['login'] = strval($user->getMail());
+                            $_SESSION['chapter'] = intval($numChapter[0]['chap_id']);
                             require_once 'views/aventure_view.php';
                         }
                         else{
