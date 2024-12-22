@@ -71,13 +71,17 @@ class Router
 }
 
 // Instanciation du routeur
-$router = new Router('merge');
+$router = new Router('DungeonXplorer');
 
 // Ajout des routes
 $router->addRoute('', 'HomeController@index'); // Pour la racine
 $router->addRoute('home', 'HomeController@index');
+$router->addRoute('adminPanel', 'AdminController@index');
 $router->addRoute('signin', 'AccountCreationController@index');
 $router->addRoute('connexion', 'ConnectionController@index');
+$router->addRoute('accountHero', 'AdminController@index');
+
+
 $router->addRoute('chapter', 'ChapterController@index');
 $router->addRoute('character', 'CharacterController@index');
 $router->addRoute('herocreation', 'HeroCreationController@index');
