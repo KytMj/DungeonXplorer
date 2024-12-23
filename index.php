@@ -70,6 +70,8 @@ class Router
     }
 }
 
+//session_destroy();
+
 // Instanciation du routeur
 $router = new Router('zMaelys');
 
@@ -97,7 +99,7 @@ $router->addRoute('deconnexionAccount', 'ConnectionController@deconnexion');
 $router->addRoute('modifMailAccount', 'AccountController@modifMail');
 $router->addRoute('modifMDPAccount', 'AccountController@modifMDP');
 $router->addRoute('userherocreation', 'HeroCreationController@creation');
-$router->addRoute('userHeroSuppression', 'HeroCreationController@supprimerHero');
+$router->addRoute('userHeroSuppression', 'AventureController@supprimerHero');
 
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));

@@ -29,7 +29,7 @@ if(isset($_SESSION['login'])){
     <body>
         <header>
             <nav class="navBar">
-                <a href="home" id="logoNav"><img src="./../../images/Logo.png" class="" alt="Logo Dungeon Xplorer" /></a>
+                <a href="home" id="logoNav"><img src="./../../image/Logo.png" class="" alt="Logo Dungeon Xplorer" /></a>
                 <div class="buttonNav">
                     <a href="adminPanel"><button type="button" class="btn" id="adminPanelButton">Accès au panel admin</button></a>
                     <a href="signin"><button type="button" class="btn" id="NewAccountButton">Créer un compte</button></a>
@@ -37,7 +37,7 @@ if(isset($_SESSION['login'])){
                     <a href="deconnexionAccount"><button type="button" class="btn" id="LogOutButton">Déconnexion</button></a>
                     <a href="accountHero"><button type="button" class="btn" id="accountHero">Personnage</button></a>
                 </div>
-                <a href="account" id="accountNav"><img src="./../../images/Account.png" id="accountIcon" alt="Icône compte" /></a>
+                <a href="account" id="accountNav"><img src="./../../image/Account.png" id="accountIcon" alt="Icône compte" /></a>
             </nav>
         </header>
         <script>
