@@ -40,8 +40,10 @@ class AccountCreationController {
                         $deconnexion->deconnexion();
                     }
                     $_SESSION['login'] = strval($newUser->getMail());
-                    require_once 'views/aventure_view.php';
-                    exit();
+                    $_SESSION['chapter'] = 1;
+
+                    $aventure = new AventureController();
+                    $aventure->index();
                 }
                 else{
                     $erreur = 'Un compte existe déjà.';

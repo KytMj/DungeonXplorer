@@ -31,9 +31,8 @@ class User{
 
     public function insert(){
         require("./core/Database.php");
-        $sql = "INSERT INTO User VALUES ('".$this->id."','".$this->mail."', '".$this->passwd."')";
+        $sql = "INSERT INTO User(user_id, user_mail, user_passwd) VALUES ('".$this->id."','".$this->mail."', '".$this->passwd."')";
         majDonneesPDO($db,$sql);
     }
 }
-
 ?>

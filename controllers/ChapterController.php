@@ -2,18 +2,21 @@
 
 // controllers/ChapterController.php
 
-require_once "./../models/Chapter.php";
-include "./../core/pdo_agile.php";
+require_once "./models/Chapter.php";
+include_once "./core/pdo_agile.php";
 
 
 class ChapterController
 {
-    // private $conn = OuvrirConnexionPDO($_SESSION['dbHost'], $_SESSION['dbName'], $_SESSION['dbUser'], $_SESSION['dbPassword']);
     private $chapters = [];
+
+    public function index() {
+        require_once 'views/chapter_view.php';
+    }
     
     public function __construct()
     {
-        require("./../core/Database.php");
+        require("./core/Database.php");
         // Exemple de chapitres avec des images
         $tab = [];
         LireDonneesPDO2($db, 
@@ -25,16 +28,16 @@ class ChapterController
         foreach($tab as $chapter){
             $choices = [];
             foreach($links as $l){ 
-                if ($l['chapter_id'] == $chapter['id']){
+                if ($l['chapter_id'] == $chapter['chap_id']){
                     array_push($choices, ["text" => $l['description'], "chapter" => $l['next_chapter_id']]);
                 }
             }
                       
             $this->chapters[] = new Chapter(
-            $chapter['id'],
-            $chapter['Titre'],
-            $chapter['content'],
-            $chapter['image'],
+            $chapter['chap_id'],
+            $chapter['chap_title'],
+            $chapter['chap_content'],
+            $chapter['chap_image'],
             $choices
             );
             
@@ -46,11 +49,11 @@ class ChapterController
         $chapter = $this->getChapter($id);
 
         if ($chapter) {
-            include '/view/chapter.php'; // Charge la vue pour le chapitre
+            include './view/chapter_view.php'; // Charge la vue pour le chapitre
         } else {
             // Si le chapitre n'existe pas, redirige vers un chapitre par défaut ou affiche une erreur
-            header('HTTP/1.0 404 Not Found');
-            echo "Chapitre non trouvé!";
+            $_SESSION['erreur'] = "Chapitre non trouvé !";
+            include_once 'views/404.php';
         }
     }
 

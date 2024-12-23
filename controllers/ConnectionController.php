@@ -25,12 +25,26 @@ class ConnectionController {
                         LireDonneesPDO2($db, "select user_passwd from User where user_mail = '".$data['mail']."'", $passwd);
 
                         if(password_verify($data['mdp'], $passwd[0]['user_passwd'])){
-                            $id = [];
-                            LireDonneesPDO2($db, "select user_id from User where user_mail = '".$data['mail']."'", $id);
+                            $numUser = [];
+                            LireDonneesPDO2($db, "select user_id from User where user_mail = '".$data['mail']."'", $numUser);
 
-                            $user = new User($id[0]['user_id'], $data['mail'], $data['mdp']);
+                            $nb = [];
+                            LireDonneesPDO2($db, "select count(*) as nb from Quest where user_id = '".$numUser[0]['user_id']."'", $nb);
+
+                            if($nb[0]['nb'] >= 1){
+                                $numsChapHero = [];
+                                LireDonneesPDO2($db, "select chap_id, hero_id from Quest where user_id = '".$numUser[0]['user_id']."'", $numsChapHero);
+                                $_SESSION['chapter'] = $numsChapHero[0]['chap_id'];
+                                $_SESSION['hero'] = $numsChapHero[0]['hero_id'];
+                            }
+                            else{
+                                $_SESSION['chapter'] = 1;
+                            }
+
+                            $user = new User($numUser[0]['user_id'], $data['mail'], $data['mdp']);
                             $_SESSION['login'] = strval($user->getMail());
-                            require_once 'views/aventure_view.php';
+                            $aventure = new AventureController();
+                            $aventure->index();
                         }
                         else{
                             $erreur = "Ce n'est pas le bon mot de passe.";
@@ -57,6 +71,19 @@ class ConnectionController {
     }
 
     public function deconnexion(){
+        if(isset($_SESSION['hero'])){
+            require("./core/Database.php");
+            $id = [];
+            LireDonneesPDO2($db, "select user_id from User where user_mail = '".$_SESSION['login']."'", $id);
+
+            $dataQuest = [];
+            LireDonneesPDO2($db, "select * from Quest where user_id = '".$id[0]['user_id']."'", $dataQuest);
+            $quest = new Quest($dataQuest[0]['hero_id'], $dataQuest[0]['user_id'], $dataQuest[0]['chap_id'], $dataQuest[0]['ques_currentPV'], $dataQuest[0]['ques_currentMana']);
+
+            //CHANGER PV ET MANA quand combat mis en place
+            $quest->update($_SESSION['chapter'], $quest->getQuestPv(), $quest->getQuestMana());
+        }
+        
         session_unset();
         session_destroy();
         require_once 'views/home_view.php';
