@@ -1,8 +1,9 @@
 <?php
     require_once "./models/Combat.php";
     require_once "./models/Monster.php";
+    include_once "./core/pdo_agile.php";
 
-    class CombatController{
+class CombatController{
         private $combat;
         private $curP;
 
@@ -10,12 +11,16 @@
             require_once 'views/combat_view.php';
         }
 
-        public function __construct($hero, $chap_id)
+        public function __construct()
         {
             require("./core/Database.php");
             $tab = [];
-            LireDonneesPDO2($db, "select * from Monster where mons_id = (select mons_id from Encounter where chap_id = ".$chap_id.")", $tab);
+            LireDonneesPDO2($db, "select * from Monster where mons_id = (select mons_id from Encounter where chap_id = ".$_SESSION['chapter'].")", $tab);
             $monster = new Monster($tab[0]['mons_name'], $tab[0]['mons_pv'], $tab[0]['mons_strength'], $tab[0]['mons_initiative'], 0);
+
+            $heroData = [];
+            LireDonneesPDO2($db, "select * from Hero join Stat using(hero_id) where hero_id = ".$_SESSION['hero'], $heroData);
+            $hero = new Hero($heroData[0]['hero_name'], $heroData[0]['sta_pv'], $heroData[0]['sta_mana'], $heroData[0]['sta_strength'], $heroData[0]['sta_initiative'], 0);
             $this->combat = new Combat($monster, $hero);
 
         }
@@ -74,20 +79,31 @@
             return FALSE;
         }
 
-        public function isHeroWinner($chap_id){
+        public function isHeroWinner(){
             require("./core/Database.php");
+            unset($_POST['submit']);
+            $choices = [];
+            LireDonneesPDO2($db, "select * from Links where chapter_id = ".$_SESSION['chapter'], $choices);
+            foreach ($choices as $path):
+                if(strpos(strval($path['description']), 'mort') !== false){
+                    $next = $path['next_chapter_id'];
+                }
+                if(strpos(strval($path['description']), 'vaincu') !== false){
+                    $death = $path['next_chapter_id'];
+                }
+            endforeach;
             if ($this->combat->getMonster()->isDead() && !($this->combat->getHero()->isDead())){
-                /*$tab = [];
-                LireDonneesPDO2($db, "REQUETE".$chap_id.")", $tab);*/
+                $_SESSION['chapter'] = $next;
             }
             else{
-                //
+                $_SESSION['chapter'] = $death;
             }
+            require_once 'views/chapter_view.php';
+            exit();
         }
 
         public function usePotion($value){
             $this->combat->heal($value);
         }
-
-
-    }
+}
+?>
