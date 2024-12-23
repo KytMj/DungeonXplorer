@@ -74,24 +74,28 @@ class Router
 $router = new Router('DungeonXplorer');
 
 // Ajout des routes
+//NAVBAR
 $router->addRoute('', 'HomeController@index'); // Pour la racine
 $router->addRoute('home', 'HomeController@index');
 $router->addRoute('adminPanel', 'AdminController@index');
 $router->addRoute('signin', 'AccountCreationController@index');
 $router->addRoute('connexion', 'ConnectionController@index');
 $router->addRoute('accountHero', 'HeroController@index');
+$router->addRoute('account', 'AccountController@index');
 
+//OTHERS PAGES
 $router->addRoute('chapter', 'ChapterController@index');
 $router->addRoute('character', 'CharacterController@index');
 $router->addRoute('herocreation', 'HeroCreationController@index');
 $router->addRoute('adventure', 'AventureController@index');
 $router->addRoute('adventurefight', 'AventureCombatController@index');
-$router->addRoute('account', 'AccountController@index');
 
+//ACTIONS
 $router->addRoute('addAccount', 'AccountCreationController@inscription');
 $router->addRoute('connexionAccount', 'ConnectionController@connexion');
 $router->addRoute('deconnexionAccount', 'ConnectionController@deconnexion');
 $router->addRoute('userherocreation', 'HeroCreationController@creation');
+$router->addRoute('userHeroSuppression', 'HeroCreationController@supprimerHero');
 
 
 // Appel de la méthode route

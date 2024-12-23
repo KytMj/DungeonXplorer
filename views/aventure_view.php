@@ -16,6 +16,21 @@
                 let resumeAdventure = document.getElementById('resumeAdventure');
                 resumeAdventure.style.display='none';
             }
+
+            var hero = <?php echo json_encode($hero); ?>;
+            if(hero == true){
+                let buttonAdventure = document.getElementById('StartNewAdventureButton');
+                buttonAdventure.onclick = () => { 
+                    var popup = confirm("Voulez-vous vraiment supprimer votre personnage ?");
+                    if(popup){
+                        console.log("JE SUPPRIME");
+                        document.getElementById("startAdventureLink").href = "userHeroSuppression";
+                    }
+                    else{
+                        document.getElementById("startAdventureLink").href = "adventure";
+                    }
+                }
+            }
         </script>
     </body>
 </html>
