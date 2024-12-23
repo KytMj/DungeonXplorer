@@ -7,3 +7,5 @@ RewriteBase /DungeonXplorer/
 
 # Réécrire toutes les autres requêtes vers index.php
 RewriteRule ^(.*)$ index.php [QSA,L]
+
+RewriteRule ^css/(.*)$ /views/css/$1 [L]
