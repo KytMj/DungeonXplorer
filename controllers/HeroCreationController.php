@@ -28,23 +28,27 @@ class HeroCreationController {
                         $data['bio'] = htmlspecialchars($data['bio']);
                         
                         unset($tab);
-                        LireDonneesPDO2($db, "select max(hero_id)+1 as nb from Hero", $tab); // Pour récupérer le hero_id
-                        $hero_id = $tab[0]['nb'];
-                        
-                        $sql = "insert into Hero values ( ". $hero_id ." , '".$data['hero_name']."' , '".$data['bio']."', 0, 'pas encore', (select class_id from Class where class_name='".$data['classePerso']."') , 1 )";
-                        procPDO($db, $sql);
-                        
-                        $sql2 = "insert into Quest values (".$hero_id." , ( select user_id from User where user_mail = '".$_SESSION['login']."'),
-                        1,(select class_basePV from Class where class_name = '".$data['classePerso']."') , (select class_baseMana from Class where class_name = '".$data['classePerso']."') )";
-                        procPDO($db, $sql2);
+                        LireDonneesPDO2($db, "select max(hero_id) as nb from Hero", $tab); // Pour récupérer le hero_id
+                        $hero_id = intval($tab[0]['nb'])+1;
 
-                        $sql3 ="insert into Stat values (".$hero_id.", (select lup_id from LevelUp where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")),
+                        
+                        
+                        $sql = "INSERT into Hero values (".$hero_id.", '".$data['hero_name']."','".$data['bio']."', 0, 'pas encore', (select class_id from Class where class_name='".$data['classePerso']."'), 1)";
+                        majDonneesPDO($db,$sql);
+                        
+                        $sql2 = "INSERT into Quest values (".$hero_id.", ( select user_id from User where user_mail = '".$_SESSION['login']."'),
+                        1,(select class_basePV from Class where class_name = '".$data['classePerso']."') , (select class_baseMana from Class where class_name = '".$data['classePerso']."') )";
+                        majDonneesPDO($db,$sql2);
+
+                        $sql3 ="INSERT into Stat values (".$hero_id.", (select lup_id from LevelUp where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")),
                         (select (class_basePV + levup_pvBonus) as sta_pv from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")),
                         (select (class_baseMana + levup_manaBonus) as sta_mana from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")),
                         (select (class_baseStrength + levup_strengthBonus) as sta_strength from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")),
                         (select (class_baseInitiative + levup_initiativeBonus) as sta_initiative from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")) )"; 
-                        procPDO($db, $sql3);
+                        majDonneesPDO($db,$sql3);
+
                         $_SESSION['hero'] = $hero_id;
+                        $_SESSION['chapter'] = 1;
 
                         require_once 'views/chapter_view.php';
                         exit();

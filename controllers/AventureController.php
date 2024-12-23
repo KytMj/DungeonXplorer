@@ -31,6 +31,7 @@ class AventureController {
             $erreur = "Connectez-vous ou créez un compte avant de partir à l'aventure !";
             $_SESSION['erreur'] = $erreur;
             require_once 'views/404.php';
+            exit();
         }
     }
 
@@ -43,7 +44,9 @@ class AventureController {
         procPDO($db, "delete from Stat where hero_id = ".$hero_id);
         procPDO($db, "delete from Hero where hero_id = ".$hero_id);
 
-        $aventure = new AventureController();
-        $aventure->index();
+        unset($_SESSION['hero']);
+
+        require_once 'views/hero_creation_view.php';
+        exit();
     }
 }
