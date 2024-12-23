@@ -25,15 +25,16 @@ class ConnectionController {
                         LireDonneesPDO2($db, "select user_passwd from User where user_mail = '".$data['mail']."'", $passwd);
 
                         if(password_verify($data['mdp'], $passwd[0]['user_passwd'])){
-                            $id = [];
-                            LireDonneesPDO2($db, "select user_id from User where user_mail = '".$data['mail']."'", $id);
+                            $numUser = [];
+                            LireDonneesPDO2($db, "select user_id from User where user_mail = '".$data['mail']."'", $numUser);
 
-                            $numChapter = [];
-                            LireDonneesPDO2($db, "select chap_id from Quest where user_id = '".$id[0]['user_id']."'", $numChapter);
+                            $numsChapHero = [];
+                            LireDonneesPDO2($db, "select chap_id, hero_id from Quest where user_id = '".$id[0]['user_id']."'", $numsChapHero);
 
-                            $user = new User($id[0]['user_id'], $data['mail'], $data['mdp']);
+                            $user = new User($numUser[0]['user_id'], $data['mail'], $data['mdp']);
                             $_SESSION['login'] = strval($user->getMail());
-                            $_SESSION['chapter'] = $numChapter[0]['chap_id'];
+                            $_SESSION['chapter'] = $numsChapHero[0]['chap_id'];
+                            $_SESSION['hero'] = $numsChapHero[0]['hero_id'];
                             require_once 'views/aventure_view.php';
                         }
                         else{

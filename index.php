@@ -79,8 +79,7 @@ $router->addRoute('home', 'HomeController@index');
 $router->addRoute('adminPanel', 'AdminController@index');
 $router->addRoute('signin', 'AccountCreationController@index');
 $router->addRoute('connexion', 'ConnectionController@index');
-$router->addRoute('accountHero', 'AdminController@index');
-
+$router->addRoute('accountHero', 'HeroController@index');
 
 $router->addRoute('chapter', 'ChapterController@index');
 $router->addRoute('character', 'CharacterController@index');
