@@ -8,9 +8,9 @@ class HeroController {
     public function index(){
         if(!isset($_SESSION['hero'])){
             require 'views/home_view.php';
-            exit();
+        }else{
+            require_once 'views/hero_view.php';
         }
-        require_once 'views/hero_view.php';
     }
 
     public function __construct() {
@@ -19,14 +19,10 @@ class HeroController {
             $tab = [];
             LireDonneesPDO2($db, "select hero_id from Quest where user_id = ( select user_id from User where user_mail = '".$_SESSION['login']."')", $tab); // Pour récupérer le hero_id
             $hero_id = $tab[0]['hero_id'];
-            unset($tab);
             if($hero_id != null){
-                //potentiellement fausse car pas de tests possibles pour l'instant 
-                $stmt = $db->prepare("SELECT * FROM Hero join Stat using(hero_id) join Equipement using(hero_id) WHERE hero_id = (select hero_id from :hero_id)");
-            
-                $stmt->execute([':id' => $id]);
-                $tab = $stmt->fetch(PDO::FETCH_ASSOC);
-                $this->hero = new Hero($tab['hero_name'], $tab['stat_pv'], $tab['stat_mana'], $tab['stat_strength'], $tab['stat_initiative'], $tab['ite_armor']);
+                unset($tab);
+                LireDonneesPDO2($db,"SELECT * FROM Hero join Stat using(hero_id) left join Equipement using(hero_id) WHERE hero_id = ".$hero_id, $tab);
+                $this->hero = new Hero($tab[0]['hero_name'], $tab[0]['sta_pv'], $tab[0]['sta_mana'], $tab[0]['sta_strength'], $tab[0]['sta_initiative'], $tab[0]['ite_armor']);
             }else{
                 $erreur = "Vous n'avez pas d'aventure en cours.";
                 $_SESSION['erreur'] = $erreur;
