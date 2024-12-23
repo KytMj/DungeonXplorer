@@ -38,22 +38,10 @@ class ChapterController
             $chapter['chap_title'],
             $chapter['chap_content'],
             $chapter['chap_image'],
+            $chapter['chap_isCombat'],
             $choices
             );
             
-        }
-    }
-
-    public function show($id)
-    {
-        $chapter = $this->getChapter($id);
-
-        if ($chapter) {
-            include './view/chapter_view.php'; // Charge la vue pour le chapitre
-        } else {
-            // Si le chapitre n'existe pas, redirige vers un chapitre par défaut ou affiche une erreur
-            $_SESSION['erreur'] = "Chapitre non trouvé !";
-            include_once 'views/404.php';
         }
     }
 

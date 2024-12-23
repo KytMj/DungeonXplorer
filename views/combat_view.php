@@ -1,11 +1,17 @@
 <?php 
-    session_start();
-    include_once "./../controllers/HeroController.php";
+    include_once "./controllers/HeroController.php";
+    include_once "./controllers/CombatController.php";
 
-    include_once "./../controllers/CombatController.php";
-
-    $test = new HeroController(1);
-    $combatC = new CombatController(new Monster("GRR", 50, 10, 10, 0) ,$test->getHero());
+    $heroController = new HeroController($_SESSION['hero']);
+    if(isset($_POST['submit'])){
+        $chap_id = $_POST['submit'];
+        $combatC = new CombatController($heroController->getHero(), $chap_id);
+    }
+    else{
+        $_SESSION['erreur'] = "Erreur 404 : Erreur dans le combat";
+        require_once 'views/404.php';
+        exit();
+    }
     if (!isset($_SESSION['curP'])){
         $combatC->init();
     }
@@ -32,12 +38,11 @@
     $_SESSION['hpv'] = $combatC->getHeroPV();
     $_SESSION['mpv'] = $combatC->getMonsterPV();
     if ($combatC->isEnded()){
-        echo ("aaaaa");
-        header("Location: chapter_view.php");
         unset($_SESSION['curP']);
         unset($_SESSION['hpv']);
         unset($_SESSION['mpv']);
         unset($_POST['action']);
+        $combatC->isHeroWinner($chap_id);
         exit();
     } 
 ?>

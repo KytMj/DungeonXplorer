@@ -73,7 +73,7 @@ class Router
 //session_destroy();
 
 // Instanciation du routeur
-$router = new Router('zCassandre');
+$router = new Router('zMaelys');
 
 // Ajout des routes
 //NAVBAR
@@ -90,7 +90,7 @@ $router->addRoute('chapter', 'ChapterController@index');
 $router->addRoute('character', 'CharacterController@index');
 $router->addRoute('herocreation', 'HeroCreationController@index');
 $router->addRoute('adventure', 'AventureController@index');
-$router->addRoute('adventurefight', 'AventureCombatController@index');
+$router->addRoute('combat', 'CombatController@index');
 
 //ACTIONS
 $router->addRoute('addAccount', 'AccountCreationController@inscription');

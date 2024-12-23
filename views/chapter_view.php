@@ -29,15 +29,22 @@ $inventory->add(new Item("pouler", "aaah", 0));
                     // retour au chapitre 1 ? réinitialisation du perso ?
                 }
             ?>
-            <ul>
-                <?php foreach ($chapter->getChoices() as $choice): ?>
-                    <li>
-                        <form id="formChapter" name="formChapter" action="chapter" method="post">
-                            <button type="submit" name="submit" value="<?php echo $choice['chapter'] ?>"><?php echo $choice['text'] ?></button>
-                        </form>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+            <?php if($chapter->getIsCombat() == 1){
+                echo(
+                "<form id=\"formChapter\" name=\"formChapter\" action=\"combat\" method=\"post\">
+                    <button type=\"submit\" name=\"submit\" value=\"".$chapter->getId()."\">Combattre</button>
+                </form>");
+            }else{
+            echo("<ul>");
+            foreach ($chapter->getChoices() as $choice):
+                echo "<li>";
+                    echo("<form id=\"formChapter\" name=\"formChapter\" action=\"chapter\" method=\"post\">");
+                        echo("<button type=\"submit`\" name=\"submit\" value=\"".$choice['chapter']."\">".$choice['text']."</button>");
+                    echo("</form>");
+                echo "</li>";
+            endforeach;
+            echo("</ul>");
+            }?>
         </main>
     </body>
 </html>
