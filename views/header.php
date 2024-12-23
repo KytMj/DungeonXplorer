@@ -29,6 +29,7 @@ if(isset($_SESSION['login'])){
             <?php require_once 'css/navbar.css'; ?>
             <?php require_once 'css/design.css'; ?>
         </style>
+        <script src="https://kit.fontawesome.com/ed6f34f20e.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <header>
@@ -39,7 +40,7 @@ if(isset($_SESSION['login'])){
                     <a href="signin"><button type="button" class="btn" id="NewAccountButton">Créer un compte</button></a>
                     <a href="connexion"><button type="button" class="btn" id="LogInButton">Connexion</button></a>
                     <a href="deconnexionAccount"><button type="button" class="btn" id="LogOutButton">Déconnexion</button></a>
-                    <a href="accountHero"><button type="button" class="btn" id="accountHero">Personnage</button></a>
+                    <a href="accountHero"><button type="button" class="btn" id="accountHero">Personnage <i class="fa-solid fa-campground"></i></button></a>
                 </div>
                 <a href="account" id="accountNav"><img src="./../../image/Account.png" id="accountIcon" alt="Icône compte" /></a>
             </nav>

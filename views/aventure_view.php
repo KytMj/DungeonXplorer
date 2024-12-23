@@ -1,12 +1,15 @@
 <?php require_once 'header.php'?>
 <!-- Page de choix entre continuer l'aventure(si commencée) ou nouvelle aventure-->
         <main>
-            <h1>Choisissez</h1>
-            <div id="resumeAdventure">
-                <a href="chapter"><button type="button" id="ResumeAdventureButton">Continuer votre aventure</button></a>
-            </div>
-            <div id="startAdventure">
-                <a href="herocreation" id="startAdventureLink"><button type="button" id="StartNewAdventureButton">Commencer une nouvelle aventure</button></a>
+            <h1> Partir à l'Aventure ! </h1>
+            <div class="description">
+                <div id="resumeAdventure">
+                    <a href="chapter"><button type="button" id="ResumeAdventureButton"> <i class="fa-solid fa-play"></i>  Continuer votre aventure </button></a>
+                </div>
+                </br>
+                <div id="startAdventure">
+                    <a href="herocreation" id="startAdventureLink"><button type="button" id="StartNewAdventureButton"> <i class="fa-solid fa-plus"></i>  Commencer une nouvelle aventure</button></a>
+                </div>
             </div>
         </main>
         

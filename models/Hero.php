@@ -22,11 +22,15 @@ class Hero extends Combattant{
         return $this->name;
     }
     public function getStats(){
-        return "PV: " . $this->pv . " Mana: " . $this->mana . " Strength: " . $this->strength;
+        return "PV : " . $this->pv . "</br> Mana : " . $this->mana . "</br> Strength : " . $this->strength;
     }
 
     public function boirePotion($value){
         $this->pv = min($this->pv + $value, $this->pvMax);
+    }
+
+    public function getArmor(){
+        return "Armor : " . $this->armor;
     }
     
 

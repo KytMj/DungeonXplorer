@@ -33,8 +33,10 @@ class HeroController {
     }
 
     public function show() {
-        echo "<h3>".$this->hero->getName()."</h3>";
+        echo "<div class='description'>";
+        echo "<h2>".$this->hero->getName()."</h3>";
         echo "<p>".$this->hero->getStats()."</p>";
+        echo "</div>";
     }
 
     public function getHero(){
