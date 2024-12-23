@@ -37,7 +37,7 @@ class HeroCreationController {
                         1,(select class_basePV from Class where class_name = '".$data['classePerso']."') , (select class_baseMana from Class where class_name = '".$data['classePerso']."') )";
                         procPDO($db, $sql2);
 
-                        $sql3 ="insert inyo Stat values (".$hero_id.", (select lup_id from LevelUp where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")),
+                        $sql3 ="insert into Stat values (".$hero_id.", (select lup_id from LevelUp where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")),
                         (select (class_basePV + levup_pvBonus) as sta_pv from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")),
                         (select (class_baseMana + levup_manaBonus) as sta_mana from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")),
                         (select (class_baseStrength + levup_strengthBonus) as sta_strength from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$hero_id.") and class_id = (select hero_class from Hero where hero_id = ".$hero_id.")),
@@ -47,18 +47,7 @@ class HeroCreationController {
                         require_once'views/home_view.php';
                         exit();
                     }else{
-                        unset($tab);
-                        LireDonneesPDO2($db, "select hero_id from Quest where user_id = ( select user_id from User where user_mail = '".$_SESSION['login']."')", $tab); // Pour récupérer le hero_id
-                        // Suppression du personnage quand il existe déjà
-                        $hero_id = $tab[0]['hero_id'];
-                        procPDO($db, "delete from Quest where hero_id = ".$hero_id);
-                        procPDO($db," delete from Hero where hero_id = ".$hero_id );
-                        procPDO($db," delete from Stat where hero_id = ".$hero_id );
-    
-                        $erreur = "Votre partie en cours a été supprimée. Pas de chance il fallait cliquer réfléchir.";
-                        $_SESSION['erreur'] = $erreur;
-                        require_once 'views/404.php';
-                        exit();
+                        require_once 'views/hero_deletion_view.php';
                     }
                 }
             }

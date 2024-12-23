@@ -89,6 +89,7 @@ $router->addRoute('addAccount', 'AccountCreationController@inscription');
 $router->addRoute('connexionAccount', 'ConnectionController@connexion');
 $router->addRoute('deconnexionAccount', 'ConnectionController@deconnexion');
 $router->addRoute('userherocreation', 'HeroCreationController@creation');
+$router->addRoute('herodeletion', 'HeroDeletionController@deletion');
 
 
 // Appel de la méthode route

@@ -6,7 +6,7 @@
                 <a href="chapter"><button type="button" id="ResumeAdventureButton">Continuer votre aventure</button></a>
             </div>
             <div id="startAdventure">
-                <a href="herocreation"><button type="button" id="StartNewAdventureButton">Commencer une nouvelle aventure</button></a>
+                <a href="herocreation" id="startAdventureA"><button type="button" id="StartNewAdventureButton">Commencer une nouvelle aventure</button></a>
             </div>
         </main>
         
