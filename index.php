@@ -73,7 +73,7 @@ class Router
 //session_destroy();
 
 // Instanciation du routeur
-$router = new Router('zCassandre');
+$router = new Router('merge');
 
 // Ajout des routes
 //NAVBAR
