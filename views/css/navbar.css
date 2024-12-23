@@ -8,6 +8,12 @@ button{
     background-color: #C4975E;
     height: 2em;
     border-radius: 5px;
+    border: none;
+    font-size: 1vw;
+}
+
+button:hover{
+    background-color: #8B1E1E;
 }
 
 .navBar button{
