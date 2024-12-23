@@ -5,8 +5,7 @@ include_once "./models/Inventory.php";
 include_once "./models/Item.php";
 
 $chapterController = new ChapterController();
-echo $_SESSION['chapter'];
-if (isset($_POST['submit'])){
+if (isset($_POST['submit']) && $_POST['submit'] != "Commencez l'aventure"){
     $_SESSION['chapter'] = $_POST['submit'];
     $chapter = $chapterController->getChapter($_POST['submit']);
 }

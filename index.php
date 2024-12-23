@@ -70,8 +70,6 @@ class Router
     }
 }
 
-//session_destroy();
-
 // Instanciation du routeur
 $router = new Router('zMaelys');
 
