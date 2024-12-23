@@ -73,7 +73,7 @@ class Router
 //session_destroy();
 
 // Instanciation du routeur
-$router = new Router('zMaelys');
+$router = new Router('zCassandre');
 
 // Ajout des routes
 //NAVBAR
