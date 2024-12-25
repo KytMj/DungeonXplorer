@@ -9,6 +9,7 @@ class HeroController {
         if(!isset($_SESSION['hero'])){
             require 'views/home_view.php';
         }else{
+            $hero = new HeroController($_SESSION['hero']);
             require_once 'views/hero_view.php';
         }
     }

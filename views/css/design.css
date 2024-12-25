@@ -54,3 +54,16 @@ main{
 input{ 
     color: black; 
 }
+
+.chapterChoices{
+    list-style-type: none;
+    text-align: center;
+}
+
+.chapterChoices li{
+    padding: 0.5rem;
+}
+
+.space{
+    padding: 0.5rem;
+}

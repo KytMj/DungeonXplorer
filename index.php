@@ -71,7 +71,7 @@ class Router
 }
 
 // Instanciation du routeur
-$router = new Router('merge');
+$router = new Router('zMaelys');
 
 // Ajout des routes
 //NAVBAR
@@ -91,14 +91,20 @@ $router->addRoute('adventure', 'AventureController@index');
 $router->addRoute('combat', 'CombatController@index');
 
 //ACTIONS
-$router->addRoute('addAccount', 'AccountCreationController@inscription');
+
 $router->addRoute('connexionAccount', 'ConnectionController@connexion');
 $router->addRoute('deconnexionAccount', 'ConnectionController@deconnexion');
+
+$router->addRoute('addAccount', 'AccountCreationController@inscription');
 $router->addRoute('modifMailAccount', 'AccountController@modifMail');
 $router->addRoute('modifMDPAccount', 'AccountController@modifMDP');
-$router->addRoute('userherocreation', 'HeroCreationController@creation');
+$router->addRoute('supprAccountUser', 'AccountController@supprimerCompte');
 
+$router->addRoute('userherocreation', 'HeroCreationController@creation');
 $router->addRoute('herodeletion', 'HeroDeletionController@deletion');
+
+$router->addRoute('supprUser', 'AdminController@supprimerUser');
+
 $router->addRoute('userHeroSuppression', 'AventureController@supprimerHero');
 
 // Appel de la méthode route

@@ -37,6 +37,7 @@ class AventureController {
 
     public function supprimerHero(){
         require("./core/Database.php");
+        $tab = [];
         LireDonneesPDO2($db, "select hero_id from Quest where user_id = (select user_id from User where user_mail = '".$_SESSION['login']."')", $tab); // Pour récupérer le hero_id
         // Suppression du personnage quand il existe déjà
         $hero_id = $tab[0]['hero_id'];

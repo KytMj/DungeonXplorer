@@ -32,8 +32,6 @@ class Hero extends Combattant{
     public function getArmor(){
         return "Armor : " . $this->armor;
     }
-    
-
 }
 
 

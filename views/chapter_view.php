@@ -1,19 +1,13 @@
 <?php
 // view/chapter.php
-include_once "./controllers/ChapterController.php";
-include_once "./models/Inventory.php";
-include_once "./models/Item.php";
-
 $chapterController = new ChapterController();
-if (isset($_POST['submit']) && $_POST['submit'] != "Commencez l'aventure"){
-    $_SESSION['chapter'] = $_POST['submit'];
-    $chapter = $chapterController->getChapter($_POST['submit']);
+if (isset($_POST['choicesChapter'])){
+    $_SESSION['chapter'] = $_POST['choicesChapter'];
+    $chapter = $chapterController->getChapter($_POST['choicesChapter']);
 }
 else{
     $chapter = $chapterController->getChapter($_SESSION['chapter']);
 }
-$inventory = new Inventory();
-$inventory->add(new Item("pouler", "aaah", 0));
 ?>
 
 <?php require_once 'header.php'?>
@@ -35,11 +29,11 @@ $inventory->add(new Item("pouler", "aaah", 0));
                     <button type=\"submit\" name=\"submit\" value=\"".$chapter->getId()."\">Combattre</button>
                 </form>");
             }else{
-            echo("<ul>");
+            echo("<ul class=\"chapterChoices\">");
             foreach ($chapter->getChoices() as $choice):
                 echo "<li>";
                     echo("<form id=\"formChapter\" name=\"formChapter\" action=\"chapter\" method=\"post\">");
-                        echo("<button type=\"submit`\" name=\"submit\" value=\"".$choice['chapter']."\">".$choice['text']."</button>");
+                        echo("<button type=\"submit`\" name=\"choicesChapter\" value=\"".$choice['chapter']."\">".$choice['text']."</button>");
                     echo("</form>");
                 echo "</li>";
             endforeach;

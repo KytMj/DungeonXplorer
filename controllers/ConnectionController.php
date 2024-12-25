@@ -26,7 +26,7 @@ class ConnectionController {
 
                         if(password_verify($data['mdp'], $passwd[0]['user_passwd'])){
                             $numUser = [];
-                            LireDonneesPDO2($db, "select user_id from User where user_mail = '".$data['mail']."'", $numUser);
+                            LireDonneesPDO2($db, "select user_id, user_isAdmin from User where user_mail = '".$data['mail']."'", $numUser);
 
                             $nb = [];
                             LireDonneesPDO2($db, "select count(*) as nb from Quest where user_id = '".$numUser[0]['user_id']."'", $nb);
@@ -43,6 +43,11 @@ class ConnectionController {
 
                             $user = new User($numUser[0]['user_id'], $data['mail'], $data['mdp']);
                             $_SESSION['login'] = strval($user->getMail());
+
+                            if($numUser[0]['user_isAdmin'] == 1){
+                                $_SESSION['admin'] = intval($user->getId());
+                            }
+
                             $aventure = new AventureController();
                             $aventure->index();
                         }

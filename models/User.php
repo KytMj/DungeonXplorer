@@ -8,10 +8,9 @@ class User{
 
     public function __construct($id, $mail, $passwd)
     {
-        $hache = password_hash($passwd, PASSWORD_DEFAULT);
         $this->id = $id;
         $this->mail = $mail;
-        $this->passwd = $hache;
+        $this->passwd = $passwd;
     }
 
     public function getId()
@@ -31,7 +30,15 @@ class User{
 
     public function insert(){
         require("./core/Database.php");
+        $hache = password_hash($this->passwd, PASSWORD_DEFAULT);
+        $this->passwd = $hache;
         $sql = "INSERT INTO User(user_id, user_mail, user_passwd) VALUES ('".$this->id."','".$this->mail."', '".$this->passwd."')";
+        majDonneesPDO($db,$sql);
+    }
+
+    public function delete(){
+        require("./core/Database.php");
+        $sql = "DELETE FROM User WHERE user_id = ".$this->id." and user_isAdmin = 0";
         majDonneesPDO($db,$sql);
     }
 }

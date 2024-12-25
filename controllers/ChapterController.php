@@ -3,6 +3,8 @@
 // controllers/ChapterController.php
 
 require_once "./models/Chapter.php";
+include_once "./models/Inventory.php";
+include_once "./models/Item.php";
 include_once "./core/pdo_agile.php";
 
 
