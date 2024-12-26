@@ -12,7 +12,7 @@
                         echo var_dump($monster);
                     endforeach;?>
                 </select>
-                <!-- tout le temps accessible le bouton de création-->
+                <!-- Bouton de création tout le temps accessible -->
                 <button type="button" id="createMonsterBtn">Créer un nouveau Monstre</button>
                 
                 <div id="divMonsterCreation" class="hidden">
@@ -55,14 +55,38 @@
                         <button id="btnMonsterCreation" type="submit" name="submit" value=""> Créer</button>   
                     </form>
                 </div>
+                
                 <!-- Accessible que quand une option est sélectionnée-->
+                <button type="button" id="editMonsterBtn">Mettre à jour ce Monstre</button>
+
+                <form id="formMonsterDeletion" name="formMonsterDel" action="editMonster" method="post">
+                    <button type="submit" id="deleteMonsterBtn" name="deleteMonster"> Supprimer ce Monstre</button> 
+                </form>
+                
             </div>
-            
 
             <script>
                 document.getElementById('createMonsterBtn').addEventListener('click', function() {
                     document.getElementById('divMonsterCreation').classList.remove('hidden');
                 });
+
+
+
+                const buttonDelete = document.getElementById('deleteMonsterBtn');
+                const select = document.getElementById('listMonster');
+                select.addEventListener('change', function() {
+                    buttonDelete.disabled = !this.selectedIndex;
+                });
+                buttonDelete.onclick = function() { 
+                    buttonDelete.value = select.options[select.selectedIndex].value;
+                    var popup = confirm("Voulez-vous vraiment supprimer ce monstre ?");
+                    if(popup){
+                        document.getElementById("formMonsterDeletion").action = "deletionMonster";
+                    }
+                    else{
+                        document.getElementById("formMonsterDeletion").action = "editMonster";
+                    }
+                }
             </script>
 
         </main>

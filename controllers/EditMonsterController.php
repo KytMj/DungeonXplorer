@@ -56,7 +56,30 @@ class EditMonsterController {
     }
 
     public function deletion(){
+        require("./core/Database.php");
+        if(isset($_SESSION['admin'])){
+            $tab = [];
+            LireDonneesPDO2($db, "select count(*) as nb from Monster where mons_id = ".$_POST['deleteMonster'], $tab); 
+
+            if($tab[0]['nb'] != 0){
+                $sql = "DELETE FROM Monster WHERE mons_id = ".$_POST['deleteMonster'];
+                majDonneesPDO($db,$sql);
+            }else{
+                $erreur = "Le monstre n'existe pas.";
+                $_SESSION['erreur'] = $erreur;
+                require_once 'views/404.php';
+                exit();
+            }
+            $this->index();
+            exit();
+        }else{
+            $erreur = "Vous n'avez pas le droit d'accéder à cette page";
+            $_SESSION['erreur'] = $erreur;
+            require_once 'views/404.php';
+            exit();
+        }
     }
+
 
     public function edit(){
     }

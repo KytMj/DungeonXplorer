@@ -51,7 +51,7 @@ main{
     gap: 20px;
 }
 
-input{ 
+input, select, option, textarea{ 
     color: black; 
 }
 
