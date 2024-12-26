@@ -6,6 +6,7 @@ require_once 'header.php';
 
             <p> Liste d'utilisateurs </p>
             <select id="listUser" name="userList" size="5">
+                <option class="space" value=""> <p>--------------</p> </option>");
                 <?php foreach ($admin->getUserList() as $user):
                     echo("<option class=\"space\" value=\"".$user['user_id']."\"> <p>".$user['user_mail']."</p> </option>");
                 endforeach;?>

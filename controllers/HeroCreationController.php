@@ -32,7 +32,6 @@ class HeroCreationController {
                         $hero_id = intval($tab[0]['nb'])+1;
 
                         
-                        
                         $sql = "INSERT into Hero values (".$hero_id.", '".$data['hero_name']."','".$data['bio']."', 0, 'pas encore', (select class_id from Class where class_name='".$data['classePerso']."'), 1)";
                         majDonneesPDO($db,$sql);
                         
