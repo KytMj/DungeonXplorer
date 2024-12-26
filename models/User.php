@@ -41,5 +41,19 @@ class User{
         $sql = "DELETE FROM User WHERE user_id = ".$this->id." and user_isAdmin = 0";
         majDonneesPDO($db,$sql);
     }
+
+    public function updateMDP(){
+        require("./core/Database.php");
+        $hache = password_hash($this->passwd, PASSWORD_DEFAULT);
+        $this->passwd = $hache;
+        $sql = "UPDATE User SET user_passwd = '".$this->passwd."' WHERE user_id = ".$this->id;
+        majDonneesPDO($db,$sql);
+    }
+
+    public function updateMail(){
+        require("./core/Database.php");
+        $sql = "UPDATE User SET user_mail = '". $this->mail ."' WHERE user_id = ".$this->id;
+        majDonneesPDO($db,$sql);
+    }
 }
 ?>

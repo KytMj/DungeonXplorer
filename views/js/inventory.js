@@ -1,6 +1,3 @@
-
-
-
 function showInventory() {
     // Get all elements with IDs starting with 'inventory-'
     for (let i = 0; i < 30; i++) { // adjust 10 to the number of items you expect

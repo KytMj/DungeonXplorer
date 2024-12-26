@@ -8,5 +8,5 @@ RewriteBase /zMaelys/
 
 # Réécrire toutes les autres requêtes vers index.php
 RewriteRule ^(.*)$ index.php [QSA,L]
-
 RewriteRule ^css/(.*)$ /views/css/$1 [L]
+RewriteRule ^js/(.*)$ /views/js/$1 [L]

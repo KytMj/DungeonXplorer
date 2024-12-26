@@ -67,3 +67,7 @@ input{
 .space{
     padding: 0.5rem;
 }
+
+.none{
+    display: none;
+}
