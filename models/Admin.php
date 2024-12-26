@@ -23,4 +23,11 @@ class Admin extends User{
         LireDonneesPDO2($db, "select * from User where user_isAdmin != 1", $players);
         return $players;
     }
+
+    public function getMonsterList(){
+        require("./core/Database.php");
+        $monsters = [];
+        LireDonneesPDO2($db, "select * from Monster", $monsters);
+        return $monsters;
+    }
 }

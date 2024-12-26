@@ -71,7 +71,7 @@ class Router
 }
 
 // Instanciation du routeur
-$router = new Router('merge');
+$router = new Router('zCassandre');
 
 // Ajout des routes
 //NAVBAR
@@ -106,6 +106,9 @@ $router->addRoute('herodeletion', 'HeroDeletionController@deletion');
 $router->addRoute('supprUser', 'AdminController@supprimerUser');
 
 $router->addRoute('userHeroSuppression', 'AventureController@supprimerHero');
+
+$router->addRoute('editMonster', 'EditMonsterController@index');
+$router->addRoute('creationMonster', 'EditMonsterController@creation');
 
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));
