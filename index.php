@@ -109,6 +109,24 @@ $router->addRoute('userHeroSuppression', 'AventureController@supprimerHero');
 
 $router->addRoute('reinitializeHero', 'ChapterController@reinitialize');
 
+$router->addRoute('editMonster', 'EditMonsterController@index');
+$router->addRoute('creationMonster', 'EditMonsterController@creation');
+$router->addRoute('deletionMonster', 'EditMonsterController@deletion');
+$router->addRoute('updateMonster', 'EditMonsterController@update');
+$router->addRoute('getMonsterData/{id}', 'EditMonsterController@getMonsterData');
+
+$router->addRoute('editItem', 'EditItemController@index');
+$router->addRoute('creationItem', 'EditItemController@creation');
+$router->addRoute('deletionItem', 'EditItemController@deletion');
+$router->addRoute('updateItem', 'EditItemController@update');
+$router->addRoute('getItemData/{id}', 'EditItemController@getItemData');
+
+$router->addRoute('editChapter', 'EditChapterController@index');
+$router->addRoute('creationChapter', 'EditChapterController@creation');
+$router->addRoute('deletionChapter', 'EditChapterController@deletion');
+$router->addRoute('updateChapter', 'EditChapterController@update');
+$router->addRoute('getChapterData/{id}', 'EditChapterController@getChapterData');
+
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));
 ?>
