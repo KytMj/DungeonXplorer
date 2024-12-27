@@ -122,17 +122,13 @@ class Hero extends Combattant{
         else{
             $sql = "UPDATE Hero SET hero_xp = (hero_xp + ".$rewards[0]['chap_XpGained'].") - ".$xpHero[0]['level_requiredXP'].", hero_level = hero_level +1 WHERE hero_id = ".$_SESSION['hero'];
             majDonneesPDO($db,$sql);
-
             unset($sql);
 
-            $lupData = [];
-            LireDonneesPDO2($db, "SELECT * FROM LevelUp where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")", $lupData);
-
-            $sql = "UPDATE Stat SET sta_pv = sta_pv + ".$lupData[0]['levup_pvBonus'].", 
-            sta_mana = sta_mana + ".$lupData[0]['levup_manaBonus'].", 
-            sta_strength = sta_strength + ".$lupData[0]['levup_strengthBonus'].", 
-            sta_initiative = sta_initiative + ".$lupData[0]['levup_initiativeBonus']."
-            WHERE hero_id = ".$_SESSION['hero']." and lup_id = ".$lupData[0]['lup_id'];
+            $sql = "UPDATE `Stat` SET sta_pv = sta_pv + (SELECT levup_pvBonus FROM LevelUp where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")), 
+            sta_mana = sta_mana + (SELECT levup_manaBonus FROM LevelUp where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")), 
+            sta_strength = sta_strength + (SELECT levup_strengthBonus FROM LevelUp where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")), 
+            sta_initiative = sta_initiative + (SELECT levup_initiativeBonus FROM LevelUp where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")),
+            lup_id = (SELECT lup_id FROM LevelUp where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero']."))  WHERE hero_id = ".$_SESSION['hero']."";
             majDonneesPDO($db,$sql);
             unset($sql);
         }

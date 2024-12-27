@@ -56,4 +56,33 @@ class ChapterController
         }
         return null; // Chapitre non trouvé
     }
+
+    public function reinitialize(){
+        require("./core/Database.php");
+        $sql = "DELETE FROM Inventory WHERE hero_id = ".$_SESSION['hero'];
+        majDonneesPDO($db,$sql);
+        unset($sql);
+
+        $sql = "DELETE FROM Stat WHERE hero_id = ".$_SESSION['hero'];
+        majDonneesPDO($db,$sql);
+        unset($sql);
+
+        $sql = "UPDATE Quest SET chap_id = 1 WHERE hero_id = ".$_SESSION['hero'];
+        majDonneesPDO($db,$sql);
+        unset($sql);
+
+        $sql = "UPDATE Hero SET hero_level = 1, hero_xp = 0 WHERE hero_id = ".$_SESSION['hero'];
+        majDonneesPDO($db,$sql);
+        unset($sql);
+
+        $sql ="INSERT into Stat values (".$_SESSION['hero'].", (select lup_id from LevelUp where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")),
+                        (select (class_basePV + levup_pvBonus) as sta_pv from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")),
+                        (select (class_baseMana + levup_manaBonus) as sta_mana from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")),
+                        (select (class_baseStrength + levup_strengthBonus) as sta_strength from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")),
+                        (select (class_baseInitiative + levup_initiativeBonus) as sta_initiative from LevelUp join Class using (class_id) where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")) )"; 
+        majDonneesPDO($db,$sql);
+        unset($sql);
+        $this->index();
+        exit();
+    }
 }
