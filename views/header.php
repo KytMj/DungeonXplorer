@@ -2,6 +2,8 @@
 $login = false;
 $heroSession = false;
 $adminSession = false;
+$chapitreSession = false;
+$combatSession = false;
 if(isset($_SESSION['login'])){
     $login = true;
     if(isset($_SESSION['hero'])){
@@ -14,6 +16,18 @@ if(isset($_SESSION['login'])){
         $adminSession = true;
     }else{
         $adminSession = false;
+    }
+
+    if(isset($_SESSION['chapter'])){
+        $chapitreSession = true;
+    }else{
+        $chapitreSession = false;
+    }
+
+    if(isset($_SESSION['curP'])){
+        $combatSession = true;
+    }else{
+        $combatSession = false;
     }
 }
 ?>
@@ -37,6 +51,9 @@ if(isset($_SESSION['login'])){
                 <a href="home" id="logoNav"><img src="./../../image/Logo.png" class="" alt="Logo Dungeon Xplorer" /></a>
                 <div class="buttonNav">
                     <a href="adminPanel"><button type="button" class="btn" id="adminPanelButton">Accès au panel admin</button></a>
+                    <a href="chapter"><button type = "button" class="btn" id="returnAdventureButton">Retour à l'aventure</button></a>
+                    <a href="combat"><button type = "button" class="btn" id="returnCombatButton">Retour au combat</button></a>
+
                     <a href="signin"><button type="button" class="btn" id="NewAccountButton">Créer un compte</button></a>
                     <a href="connexion"><button type="button" class="btn" id="LogInButton">Connexion</button></a>
                     <a href="deconnexionAccount"><button type="button" class="btn" id="LogOutButton">Déconnexion</button></a>
@@ -49,6 +66,11 @@ if(isset($_SESSION['login'])){
             var login = <?php echo json_encode($login); ?>;
             var heroSession = <?php echo json_encode($heroSession); ?>;
             var adminSession = <?php echo json_encode($adminSession); ?>;
+            var chapitreSession = <?php echo json_encode($chapitreSession); ?>;
+            var combatSession = <?php echo json_encode($combatSession); ?>;
+
+            var path = <?php echo json_encode($_SERVER["REQUEST_URI"]); ?>;
+            var __filename = path.split(/(\\|\/)/g).pop()
 
             let account = document.getElementById('accountIcon');
             let deconnexion = document.getElementById('LogOutButton');
@@ -84,6 +106,22 @@ if(isset($_SESSION['login'])){
             else{
                 adminPanel.classList.remove('none');
             }
+
+            let returnAdventure = document.getElementById('returnAdventureButton');
+            console.log(__filename);
+            if(chapitreSession == false || login == false || __filename == "chapter" || combatSession == true || __filename == "combat" || __filename == "userherocreation"){
+                returnAdventure.classList.add('none');
+            }else{
+                returnAdventure.classList.remove('none');
+            }
+
+            let returnCombatButton = document.getElementById('returnCombatButton');
+            if(combatSession == false || login == false || __filename == "combat"){
+                returnCombatButton.classList.add('none');
+            }else{
+                returnCombatButton.classList.remove('none');
+            }
+
         </script>
     </body>
 </html>
