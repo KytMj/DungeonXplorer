@@ -1,6 +1,6 @@
 RewriteEngine On
 
-RewriteBase /merge/
+RewriteBase /DungeonXplorer/
 
 # Ne pas réécrire les requêtes pour les fichiers existants ou les répertoires
 # RewriteCond %{REQUEST_FILENAME} !-f

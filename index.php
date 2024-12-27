@@ -71,7 +71,7 @@ class Router
 }
 
 // Instanciation du routeur
-$router = new Router('merge');
+$router = new Router('DungeonXplorer');
 
 // Ajout des routes
 //NAVBAR
