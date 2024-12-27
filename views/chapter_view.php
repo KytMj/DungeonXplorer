@@ -19,8 +19,6 @@ else{
             <?php 
                 if(count($chapter->getChoices()) != 0){ 
                     echo "<h2>Choisissez votre chemin:</h2>";
-                }else{
-                    // retour au chapitre 1 ? réinitialisation du perso ?
                 }
             ?>
             <?php if($chapter->getIsCombat() == 1){
@@ -31,11 +29,19 @@ else{
             }else{
             echo("<ul class=\"chapterChoices\">");
             foreach ($chapter->getChoices() as $choice):
-                echo "<li>";
-                    echo("<form id=\"formChapter\" name=\"formChapter\" action=\"chapter\" method=\"post\">");
-                        echo("<button type=\"submit`\" name=\"choicesChapter\" value=\"".$choice['chapter']."\">".$choice['text']."</button>");
-                    echo("</form>");
-                echo "</li>";
+                if($choice['text'] == "Terminer" || $choice['text'] == "C'est reparti !!!"){
+                    echo "<li>";
+                        echo("<form id=\"formChapter\" name=\"formChapter\" action=\"reinitializeHero\" method=\"post\">");
+                            echo("<button type=\"submit`\" name=\"choicesChapter\" value=\"".$choice['chapter']."\">".$choice['text']."</button>");
+                        echo("</form>");
+                    echo "</li>";
+                }else{
+                    echo "<li>";
+                        echo("<form id=\"formChapter\" name=\"formChapter\" action=\"chapter\" method=\"post\">");
+                            echo("<button type=\"submit`\" name=\"choicesChapter\" value=\"".$choice['chapter']."\">".$choice['text']."</button>");
+                        echo("</form>");
+                    echo "</li>";
+                }
             endforeach;
             echo("</ul>");
             }?>

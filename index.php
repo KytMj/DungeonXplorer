@@ -107,6 +107,8 @@ $router->addRoute('supprUser', 'AdminController@supprimerUser');
 
 $router->addRoute('userHeroSuppression', 'AventureController@supprimerHero');
 
+$router->addRoute('reinitializeHero', 'ChapterController@reinitialize');
+
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));
 ?>
