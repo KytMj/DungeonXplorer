@@ -80,11 +80,7 @@
                         </div>
                         <button id="btnChapterUpdate" type="submit" name="submit" value=""> Mettre à jour</button>
                     </form>
-                </div>
-
-
-                <button type="button" id="updateChapterBtn" name="updateChapter"> Rajouter un monstre à ce Chapitre</button> 
-                
+                </div>          
                 
             </div>
 

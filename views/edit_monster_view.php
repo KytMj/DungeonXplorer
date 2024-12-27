@@ -41,7 +41,7 @@
                         </div>
                         <div>
                             <label for="mana">Mana : </label>
-                            <input name="mana" type="number" min="1" max="10" required>
+                            <input name="mana" type="number" min="0" max="10" required>
                         </div>
                         <div>
                             <label for="initiative">Initiative : </label>
