@@ -78,7 +78,7 @@ input, select, option, textarea{
 
 @media (max-width: 850px) {
     .description{
-        font-size:1vw;
+        font-size:3vw;
     }
 
     h1{
