@@ -44,6 +44,11 @@ class EditChapterController {
                         require_once 'views/404.php';
                         exit();
                     }
+                }else{
+                    $erreur = "Données manquantes ou pas bien envoyées";
+                    $_SESSION['erreur'] = $erreur;
+                    require_once 'views/404.php';
+                    exit();
                 }
             }
         }else{
@@ -81,7 +86,53 @@ class EditChapterController {
 
 
     public function update(){
-        
+        require("./core/Database.php");
+        if(isset($_SESSION['admin'])){
+            $data = $_POST;
+            if(isset($data['submit'])){
+                if(  (isset($data['chap_id']) && !empty($data['chap_id'])) 
+                && (isset($data['titleUpdate']) && !empty($data['titleUpdate'])) 
+                && (isset($data['contentUpdate']) && !empty($data['contentUpdate'])) 
+                && (isset($data['imageUpdate']) && !empty($data['imageUpdate'])) 
+                && (isset($data['xpUpdate']) && !empty($data['xpUpdate']))
+                && (isset($data['isCombatUpdate'])) ){
+                    
+                    $tab = []; LireDonneesPDO2($db, "select count(*) as nb from Chapter where chap_id = ".$data['chap_id'], $tab); 
+                    
+                    if($tab[0]['nb'] != 0){ 
+                        
+                        $data['titleUpdate'] = htmlspecialchars($data['titleUpdate']);
+                        $data['contentUpdate'] = htmlspecialchars($data['contentUpdate']);
+                        $data['imageUpdate'] = htmlspecialchars($data['imageUpdate']);
+                        $data['xpUpdate'] = htmlspecialchars($data['xpUpdate']);
+                        $data['isCombatUpdate'] = htmlspecialchars($data['isCombatUpdate']); 
+                        
+                        $sql = "UPDATE Chapter SET
+                            chap_title = '".$data['titleUpdate']."' , 
+                            chap_content = '".$data['contentUpdate']."' , 
+                            chap_image = '".$data['imageUpdate']."' , 
+                            chap_XpGained = ".$data['xpUpdate'].", 
+                            chap_isCombat = ".$data['isCombatUpdate']." 
+                            WHERE chap_id = ".$data['chap_id']; 
+                            
+                            majDonneesPDO($db, $sql); 
+                            $this->index(); 
+                            exit();
+                    } else { 
+                        $erreur = "Le chapitre n'existe pas."; 
+                        $_SESSION['erreur'] = $erreur;
+                        require_once 'views/404.php'; 
+                        exit(); 
+                    } 
+                } 
+            } 
+        } else {
+            $erreur = "Vous n'avez pas le droit d'accéder à cette page"; 
+            $_SESSION['erreur'] = $erreur;
+            require_once 'views/404.php'; 
+            exit(); 
+           
+        }
     }
 
     public function getChapterData($id) {

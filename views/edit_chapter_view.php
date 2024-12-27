@@ -48,9 +48,43 @@
                 <form id="formChapterDeletion" name="formChapterDel" action="deleteChapter" method="post">
                     <button type="submit" id="deleteChapterBtn" name="deleteChapter"> Supprimer ce Chapitre</button> 
                 </form>
+
+
+                <button type="button" id="updateChapterBtn" name="updateChapter"> Mettre à jour ce Chapitre</button> 
+                
+                <div id="divChapterUpdate" class="hidden">
+                    <form id="formChapterUpdate" name="formChapterUpdate" action="updateChapter" method="post">
+                        <input type="hidden" id="chap_id" name="chap_id" value="">
+                        <div>
+                            <label for="titleUpdate">Titre : </label>
+                            <input type="text" id="titleUpdate" name="titleUpdate" size="100" value="" placeholder="Titre du Chapitre" 
+                            pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{3,255}" required>
+                        </div>
+                        <div>
+                            <label for="contentUpdate">Contenu : </label>
+                            <textarea id="contentUpdate" name="contentUpdate" rows="4" cols="50" placeholder=" Contenu du chapitre" value="" pattern="^[a-zA-Z0-9 .,!?'\"-]{10,1000}$" required>
+                            </textarea>
+                        </div>
+                        <div>
+                            <label for="imageUpdate">URL de l'image : </label>
+                            <input id="imageUpdate" type="text" id="imageUpdate" name="imageUpdate" size="100" value="" placeholder="URL" 
+                            pattern="[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{3,255}" required>
+                        </div>
+                        <div>
+                            <label for="xpUpdate">XP : </label>
+                            <input id="xpUpdate" name="xpUpdate" type="number" min="0" max="9999" value="" required>
+                        </div>
+                        <div>
+                            <label for="isCombatUpdate">Combat (1=oui, 0=non) : </label>
+                            <input id="isCombatUpdate" name="isCombatUpdate" type="number" min="0" max="1" value="" required>
+                        </div>
+                        <button id="btnChapterUpdate" type="submit" name="submit" value=""> Mettre à jour</button>
+                    </form>
+                </div>
                 
                 
             </div>
+
 
             <script>
                 document.getElementById('createChapterBtn').addEventListener('click', function() {
@@ -73,6 +107,51 @@
                         document.getElementById("formChapterDeletion").action = "editChapter";
                     }
                 }
+
+
+
+                document.getElementById('updateChapterBtn').addEventListener('click', function() { 
+                    var selectedChapter = document.getElementById('listChapter').value; 
+                    console.log(selectedChapter); 
+                    if (selectedChapter) { 
+                        fetch(`getChapterData/${selectedChapter}`, { 
+                            method: 'POST', 
+                            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                        }) 
+                        .then(response => response.json()) 
+                        .then(data => {
+                            console.log('Données reçues : ', data);  // Vérification des données reçues
+
+                            if (data && Array.isArray(data) && data.length > 0) {
+                                const chapter = data[0]; 
+
+                                document.getElementById('titleUpdate').value = chapter.chap_title.trim();
+                                document.getElementById('contentUpdate').value = chapter.chap_content.trim();
+                                document.getElementById('imageUpdate').value = chapter.chap_image.trim();
+                                document.getElementById('xpUpdate').value = chapter.chap_XpGained;
+                                document.getElementById('isCombatUpdate').value = chapter.chap_isCombat;
+                                document.getElementById('chap_id').value = chapter.chap_id;
+
+                                document.getElementById('divChapterUpdate').classList.remove('hidden');
+                            } else {
+                                alert('Aucune donnée reçue ou format incorrect');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erreur lors de la récupération des données : ', error);
+                            alert('Erreur lors de la récupération des données');
+                        });
+                    } else {
+                         alert("Veuillez sélectionner un chapitre à mettre à jour."); 
+                    } 
+                });
+                    
+                document.getElementById('formChapterUpdate').addEventListener('submit', function(event) { 
+                    var popup = confirm("Voulez-vous vraiment mettre à jour ce chapitre ?"); 
+                    if (!popup) { 
+                        event.preventDefault(); 
+                    } 
+                });
                 
             </script>
 
