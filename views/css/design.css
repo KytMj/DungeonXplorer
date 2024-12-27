@@ -75,3 +75,23 @@ input, select, option, textarea{
 .hidden{
     display:none;
 }
+
+@media (max-width: 850px) {
+    .description{
+        font-size:1vw;
+    }
+
+    h1{
+        font-size:6vw;
+    }
+    
+    h2{
+        font-size:5vw;
+    }
+
+    button{
+        font-size:2.5vw;
+    }
+
+ }
+ 

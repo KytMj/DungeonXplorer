@@ -115,12 +115,6 @@ $router->addRoute('deletionMonster', 'EditMonsterController@deletion');
 $router->addRoute('updateMonster', 'EditMonsterController@update');
 $router->addRoute('getMonsterData/{id}', 'EditMonsterController@getMonsterData');
 
-$router->addRoute('editItem', 'EditItemController@index');
-$router->addRoute('creationItem', 'EditItemController@creation');
-$router->addRoute('deletionItem', 'EditItemController@deletion');
-$router->addRoute('updateItem', 'EditItemController@update');
-$router->addRoute('getItemData/{id}', 'EditItemController@getItemData');
-
 $router->addRoute('editChapter', 'EditChapterController@index');
 $router->addRoute('creationChapter', 'EditChapterController@creation');
 $router->addRoute('deletionChapter', 'EditChapterController@deletion');
