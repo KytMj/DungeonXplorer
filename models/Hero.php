@@ -100,6 +100,72 @@ class Hero extends Combattant{
     public function getArmor(){
         return "Armor : " . $this->defArmor;
     }
+
+    public function getReward($chapter_id){
+        require("./core/Database.php");
+        $encounter = [];
+        LireDonneesPDO2($db, "SELECT * FROM `Chapter` left join Encounter using (chap_id) where chap_id = ".$chapter_id, $encounter);
+
+        $rewards = [];
+        LireDonneesPDO2($db, "SELECT * FROM `Chapter` left join Reward using(chap_id) where chap_id = ".$chapter_id, $rewards);
+
+        $nbRewards = [];
+        LireDonneesPDO2($db, "SELECT count(*) as nb FROM `Chapter` join Reward using(chap_id) where chap_id = ".$chapter_id, $nbRewards);
+
+        $xpHero = [];
+        LireDonneesPDO2($db, "SELECT hero_xp, hero_level, level_requiredXP FROM `Hero` her left join `Level` lvl on her.hero_level = lvl.level_num WHERE hero_id = ".$_SESSION['hero'], $xpHero);
+
+        if($xpHero[0]['hero_xp'] + $rewards[0]['chap_XpGained'] < $xpHero[0]['level_requiredXP']){
+            $sql = "UPDATE Hero SET hero_xp = hero_xp + ".$rewards[0]['chap_XpGained']." WHERE hero_id = ".$_SESSION['hero'];
+            majDonneesPDO($db,$sql);
+        }
+        else{
+            $sql = "UPDATE Hero SET hero_xp = (hero_xp + ".$rewards[0]['chap_XpGained'].") - ".$xpHero[0]['level_requiredXP'].", hero_level = hero_level +1 WHERE hero_id = ".$_SESSION['hero'];
+            majDonneesPDO($db,$sql);
+
+            unset($sql);
+
+            $lupData = [];
+            LireDonneesPDO2($db, "SELECT * FROM LevelUp where level_id = (select hero_level from Hero where hero_id = ".$_SESSION['hero'].") and class_id = (select hero_class from Hero where hero_id = ".$_SESSION['hero'].")", $lupData);
+
+            $sql = "UPDATE Stat SET sta_pv = sta_pv + ".$lupData[0]['levup_pvBonus'].", 
+            sta_mana = sta_mana + ".$lupData[0]['levup_manaBonus'].", 
+            sta_strength = sta_strength + ".$lupData[0]['levup_strengthBonus'].", 
+            sta_initiative = sta_initiative + ".$lupData[0]['levup_initiativeBonus']."
+            WHERE hero_id = ".$_SESSION['hero']." and lup_id = ".$lupData[0]['lup_id'];
+            majDonneesPDO($db,$sql);
+            unset($sql);
+        }
+
+        if($nbRewards[0]['nb'] != 0){
+            $items = [];
+            LireDonneesPDO2($db, "SELECT count(*) as nb FROM `Inventory` where hero_id = ".$_SESSION['hero']." and ite_id = ". $rewards[0]['ite_id'], $items);
+            if($items[0]['nb'] > 0){
+                $sql = "UPDATE Inventory SET inven_quantity = inven_quantity + ". $rewards[0]['rew_quantity'] ." WHERE hero_id = ".$_SESSION['hero'];
+                majDonneesPDO($db,$sql);
+                unset($sql);
+            }
+            else{
+                $sql = "INSERT INTO Inventory VALUES (".$_SESSION['hero'].", ".$rewards[0]['ite_id'].", ".$rewards[0]['rew_quantity'].")";
+                majDonneesPDO($db,$sql);
+                unset($sql);
+            }
+            unset($items);
+        }
+
+        $items = [];
+        LireDonneesPDO2($db, "SELECT count(*) as nb FROM `Inventory` where hero_id = ".$_SESSION['hero']." and ite_id = ". $encounter[0]['ite_id'], $items);
+        if($items[0]['nb'] > 0){
+            $sql = "UPDATE Inventory SET inven_quantity = inven_quantity + ". $encounter[0]['enc_quantity'] ." WHERE hero_id = ".$_SESSION['hero'];
+            majDonneesPDO($db,$sql);
+            unset($sql);
+        }
+        else{
+            $sql = "INSERT INTO Inventory VALUES (".$_SESSION['hero'].", ".$encounter[0]['ite_id'].", ".$encounter[0]['enc_quantity'].")";
+            majDonneesPDO($db,$sql);
+            unset($sql);
+        }
+    }
 }
 
 

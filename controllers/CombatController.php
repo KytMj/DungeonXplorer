@@ -166,7 +166,7 @@ class CombatController{
                 }
             endforeach;
             if ($this->combat->getMonster()->isDead() && !($this->combat->getHero()->isDead())){
-                
+                $this->getCombat()->getHero()->getReward($_SESSION['chapter']);
                 $_SESSION['chapter'] = $next;
             }
             else{
