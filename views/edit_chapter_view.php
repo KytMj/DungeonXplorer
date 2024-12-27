@@ -50,7 +50,7 @@
                 </form>
 
 
-                <button type="button" id="updateChapterBtn" name="updateChapter"> Mettre à jour ce Chapitre</button> 
+                <button type="button" id="updateChapterBtn" name="updateChapter"> Mettre à jour les informations de ce Chapitre</button> 
                 
                 <div id="divChapterUpdate" class="hidden">
                     <form id="formChapterUpdate" name="formChapterUpdate" action="updateChapter" method="post">
@@ -81,6 +81,9 @@
                         <button id="btnChapterUpdate" type="submit" name="submit" value=""> Mettre à jour</button>
                     </form>
                 </div>
+
+
+                <button type="button" id="updateChapterBtn" name="updateChapter"> Rajouter un monstre à ce Chapitre</button> 
                 
                 
             </div>

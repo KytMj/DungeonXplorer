@@ -81,7 +81,7 @@
                         
                         <div>
                             <label for="itecleUpdate">Item clé : </label>
-                            <input name="itecleUpdate" type="number" min="0" max="1" value="" required>
+                            <input id="itecleUpdate" name="itecleUpdate" type="number" min="0" max="1" value="" required>
                         </div>
                         <div>
                             <label for="effectUpdate">Effet : </label>
@@ -91,7 +91,7 @@
                         
                         <div>
                             <label for="iteequipableUpdate">Equipable : </label>
-                            <input name="iteequipableUpdate" type="number" min="0" max="1" value="" required>
+                            <input id="iteequipableUpdate" name="iteequipableUpdate" type="number" min="0" max="1" value="" required>
                         </div>
                         
                         <button id="btnItemUpdate" type="submit" name="submit"> Créer </button>   
