@@ -110,6 +110,8 @@ $router->addRoute('userHeroSuppression', 'AventureController@supprimerHero');
 $router->addRoute('editMonster', 'EditMonsterController@index');
 $router->addRoute('creationMonster', 'EditMonsterController@creation');
 $router->addRoute('deletionMonster', 'EditMonsterController@deletion');
+$router->addRoute('updateMonster', 'EditMonsterController@update');
+$router->addRoute('getMonsterData/{id}', 'EditMonsterController@getMonsterData');
 
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));

@@ -71,3 +71,7 @@ input, select, option, textarea{
 .none{
     display: none;
 }
+
+.hidden{
+    display:none;
+}

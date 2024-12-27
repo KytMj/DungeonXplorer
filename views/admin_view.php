@@ -42,7 +42,7 @@ require_once 'header.php';
                     document.getElementById("formUserSUPP").action = "adminPanel";
                 }
             }
-
+            
         </script>
     </body>
 </html>

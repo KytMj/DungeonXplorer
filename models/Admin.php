@@ -30,4 +30,13 @@ class Admin extends User{
         LireDonneesPDO2($db, "select * from Monster", $monsters);
         return $monsters;
     }
+
+    public function getMonsterData($mons_id){
+        require("./core/Database.php");
+        $monster = [];
+        $sql = "select * from Monster WHERE mons_id = ".$mons_id;
+        LireDonneesPDO2($db, $sql, $monster);
+        echo json_encode($monster);
+        return $monster;
+    }
 }
