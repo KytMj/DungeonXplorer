@@ -11,7 +11,7 @@ else{
 ?>
 
 <?php require_once 'header.php'?>
-        <main>
+        <main class="description">
             <h1><?php echo $chapter->getTitle(); ?></h1>
             <img src="./../image/<?php echo  $chapter->getImage(); ?>" alt="Image de chapitre" class="img-fluid" style="width: 150px; height: 150px;"/>
             <p><?php echo $chapter->getDescription(); ?></p>
