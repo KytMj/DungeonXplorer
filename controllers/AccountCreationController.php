@@ -41,8 +41,9 @@ class AccountCreationController {
                     }
                     $_SESSION['login'] = strval($newUser->getMail());
                     $_SESSION['chapter'] = 1;
-                    require_once 'views/aventure_view.php';
-                    exit();
+
+                    $aventure = new AventureController();
+                    $aventure->index();
                 }
                 else{
                     $erreur = 'Un compte existe déjà.';

@@ -240,50 +240,43 @@ Qu’avez-vous fait, Malheureux !", null, null);
 
 
 -- ---------------------------------LINKS-----------------------------------------------------
-insert into Links values (1, 1, 2, "Continuer");
+insert into Links(chapter_id,next_chapter_id,description) values (1,2,"Continuer");
+insert into Links(chapter_id,next_chapter_id,description) values (2, 3, "Emprunter le chemin sinueux");
+insert into Links(chapter_id,next_chapter_id,description) values (2, 4, "Choisir le sentier couvert de ronces");
 
-insert into Links values (2, 2, 3, "Emprunter le chemin sinueux");
-insert into Links values (3, 2, 4, "Choisir le sentier couvert de ronces");
-
-insert into Links values (4, 3, 5, "Choisir de rester prudent");
-insert into Links values (5, 3, 6, "Décider d’ignorer les bruits et de poursuivre la route");
+insert into Links(chapter_id,next_chapter_id,description) values (3, 5, "Choisir de rester prudent");
+insert into Links(chapter_id,next_chapter_id,description) values (3, 6, "Décider d’ignorer les bruits et de poursuivre la route");
 
 
-insert into Links values (6, 4, 8, "Le sanglier est vaincu !");
-insert into Links values (7, 4, 10, "Le sanglier vous a vaincu...");
+insert into Links(chapter_id,next_chapter_id,description) values (4, 8, "Le sanglier est vaincu !");
+insert into Links(chapter_id,next_chapter_id,description) values (4, 10, "Le sanglier vous a vaincu...");
 
-insert into Links values (8, 5, 7, "Continuer");
+insert into Links(chapter_id,next_chapter_id,description) values (5, 7, "Continuer");
 
-insert into Links values (9, 6, 7, "Le loup noir est vaincu !");
-insert into Links values (10, 6, 10, "Le loup noir vous a vaincu...");
+insert into Links(chapter_id,next_chapter_id,description) values (6, 7, "Le loup noir est vaincu !");
+insert into Links(chapter_id,next_chapter_id,description) values (6, 10, "Le loup noir vous a vaincu...");
 
-insert into Links values (11, 7, 8, "Décider de prendre le sentier couvert de mousse");
-insert into Links values (12, 7, 9, "Choisir de suivre le chemin tortueux à travers les racines");
+insert into Links(chapter_id,next_chapter_id,description) values (7, 8, "Décider de prendre le sentier couvert de mousse");
+insert into Links(chapter_id,next_chapter_id,description) values (7, 9, "Choisir de suivre le chemin tortueux à travers les racines");
 
-insert into Links values (13, 8, 9, "Ignorer cette curiosité et poursuivre votre route");
-insert into Links values (14, 8, 11, "Toucher la pierre gravée");
+insert into Links(chapter_id,next_chapter_id,description) values (8, 9, "Ignorer cette curiosité et poursuivre votre route");
+insert into Links(chapter_id,next_chapter_id,description) values (8, 11, "Toucher la pierre gravée");
 
--- 9
+insert into Links(chapter_id,next_chapter_id,description) values (10, 1, "C'est reparti !!!");
 
--- 10
-
-insert into Links values (15, 10, 1, "C'est reparti !!!");
-
-insert into Links values (16, 11, 10, "Voir le sort qui vous attend...");
+insert into Links(chapter_id,next_chapter_id,description) values (11, 10, "Voir le sort qui vous attend...");
 
 
 -- -------------------------------MONSTER---------------------------------------------------------
-insert into Items values (1, "défences de sanglier", "valent beacoup d'or");
-
-insert into Items values (2, "peau de loup", "peut être utilisée comme cape");
+insert into Items (ite_name,ite_type,ite_description,ite_effects) values ("défences de sanglier","babiole","valent beaucoup d'or","rien");
+insert into Items (ite_name,ite_type,ite_description,ite_effects) values("peau de loup","équipement","peut être utilisée comme cape","rien");
 
 insert into Loot values(1, "récompenses du sanglier", 1, 2);
 
 insert into Loot values (2, "récompenses du loup", 2, 1);
 
-insert into Monster values (1, "sanglier", 30, 0, 2, 3, "charge", 1, 50 );
-
-insert into Monster values (2, "loup", 15, 0, 20, 2, "frostbite", 2, 30);
+insert into Monster values (1, "sanglier","un sanglier menaçant",50,"charge",30,0,2,3);
+insert into Monster values (2,"loup","un loup affamé",30,"frostbite",15,0,20,2);
 
 -- --------------------------------CLASSES----------------------------------------------------------
 insert into Class values (1, "guerrier", "tape fort avec beaucoup de points de vie mais manque d'initiative et de mana.", 30, 0, 5, 5, 5);

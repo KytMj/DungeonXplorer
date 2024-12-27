@@ -9,7 +9,7 @@
                     Dans sa première version, DungeonXplorer permettra aux joueurs de créer un personnage parmi trois  classes emblématiques 
                     — guerrier, voleur, magicien — et d’évoluer dans un scénario captivant, tout en  assurant à chacun la possibilité de conserver sa progression.
                     Nous sommes enthousiastes de partager avec vous cette application et espérons qu'elle saura vous  plonger au cœur des mystères du Val Perdu !</p>
-                <a href="<?php if(isset($_SESSION['login'])){ echo 'adventure'; }else{ echo 'signin';}?>"><button type="button" id="NewAccountButton">Commencer l'Aventure</button></a>
+                <a href="<?php if(isset($_SESSION['login'])){ echo 'adventure'; }else{ echo 'signin';}?>"><button type="button" id="NewAccountButton"> Partir à l'Aventure ! <i class="fa-solid fa-person-hiking"></i></button></a>
             </div>
         </main>
     </body>
