@@ -18,8 +18,8 @@ require_once 'header.php';
                 <div id="editMonster">
                     <a href="editMonster"><button type="button" id="editMonsterButton"> Gérer les Monstres </button></a>
                 </div>
-                <div id="editLoot">
-                    <a href="editLoot"><button type="button" id="editLootButton"> Gérer les Loots / Objets </button></a>
+                <div id="editItem">
+                    <a href="editItem"><button type="button" id="editItemButton"> Gérer les Objets / Items </button></a>
                 </div>
                 <div id="editChapter">
                     <a href="editChapter"><button type="button" id="editChapterButton"> Gérer les Chapitres </button></a>

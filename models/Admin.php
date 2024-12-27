@@ -39,4 +39,21 @@ class Admin extends User{
         echo json_encode($monster);
         return $monster;
     }
+
+    public function getItemList(){
+        require("./core/Database.php");
+        $items = [];
+        LireDonneesPDO2($db, "select * from Items", $items);
+        return $items;
+    }
+
+    public function getItemData($ite_id){
+        require("./core/Database.php");
+        $item = [];
+        $sql = "select * from Items WHERE ite_id = ".$ite_id;
+        LireDonneesPDO2($db, $sql, $item);
+        echo json_encode($item);
+        return $item;
+    }
+
 }

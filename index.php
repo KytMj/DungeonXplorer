@@ -113,6 +113,12 @@ $router->addRoute('deletionMonster', 'EditMonsterController@deletion');
 $router->addRoute('updateMonster', 'EditMonsterController@update');
 $router->addRoute('getMonsterData/{id}', 'EditMonsterController@getMonsterData');
 
+$router->addRoute('editItem', 'EditItemController@index');
+$router->addRoute('creationItem', 'EditItemController@creation');
+$router->addRoute('deletionItem', 'EditItemController@deletion');
+$router->addRoute('updateItem', 'EditItemController@update');
+$router->addRoute('getItemData/{id}', 'EditItemController@getItemData');
+
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));
 ?>
