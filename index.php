@@ -119,6 +119,10 @@ $router->addRoute('deletionItem', 'EditItemController@deletion');
 $router->addRoute('updateItem', 'EditItemController@update');
 $router->addRoute('getItemData/{id}', 'EditItemController@getItemData');
 
+$router->addRoute('editChapter', 'EditChapterController@index');
+$router->addRoute('creationChapter', 'EditChapterController@creation');
+$router->addRoute('deletionChapter', 'EditChapterController@deletion');
+
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));
 ?>

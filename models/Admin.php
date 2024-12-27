@@ -56,4 +56,20 @@ class Admin extends User{
         return $item;
     }
 
+    public function getChapterList(){
+        require("./core/Database.php");
+        $chapters = [];
+        LireDonneesPDO2($db, "select * from Chapter", $chapters);
+        return $chapters;
+    }
+
+    public function getChapterData($chap_id){
+        require("./core/Database.php");
+        $chapter = [];
+        $sql = "select * from Chapter WHERE chap_id = ".$chap_id;
+        LireDonneesPDO2($db, $sql, $chapter);
+        echo json_encode($chapter);
+        return $chapter;
+    }
+
 }
