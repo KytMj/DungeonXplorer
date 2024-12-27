@@ -51,7 +51,7 @@ main{
     gap: 20px;
 }
 
-input{ 
+input, select, option, textarea{ 
     color: black; 
 }
 
@@ -71,3 +71,27 @@ input{
 .none{
     display: none;
 }
+
+.hidden{
+    display:none;
+}
+
+@media (max-width: 850px) {
+    .description{
+        font-size:3vw;
+    }
+
+    h1{
+        font-size:6vw;
+    }
+    
+    h2{
+        font-size:5vw;
+    }
+
+    button{
+        font-size:2.5vw;
+    }
+
+ }
+ 

@@ -15,6 +15,14 @@ require_once 'header.php';
             <form id="formUserSUPP" name="formUserSUPP" action="adminPanel" method="post">
                 <button id="btnSuppUser" type="submit" name="supprimerUser" value="" disabled>Supprimer</button>   
             </form>
+            <div class="description">
+                <div id="editMonster">
+                    <a href="editMonster"><button type="button" id="editMonsterButton"> Gérer les Monstres </button></a>
+                </div>
+                <div id="editChapter">
+                    <a href="editChapter"><button type="button" id="editChapterButton"> Gérer les Chapitres </button></a>
+                </div>
+            </div>
         </main>
         <script>
             const button = document.getElementById('btnSuppUser');
@@ -32,7 +40,7 @@ require_once 'header.php';
                     document.getElementById("formUserSUPP").action = "adminPanel";
                 }
             }
-
+            
         </script>
     </body>
 </html>
