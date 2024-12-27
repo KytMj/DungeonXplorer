@@ -14,11 +14,12 @@ class Inventory{
         $query = "SELECT Items.ite_id, Items.ite_name, Items.ite_description, Inventory.inven_quantity
                   FROM Inventory
                   JOIN Items ON Inventory.ite_id = Items.ite_id
-                  WHERE Inventory.hero_id = :hero_id";
+                  WHERE Inventory.hero_id = :hero_id"; 
         $rqt = $this->db->prepare($query);
         $rqt->bindParam(':hero_id', $this->hero_id, PDO::PARAM_INT);
         $rqt->execute();
-        return $rqt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $rqt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
     }
 
 

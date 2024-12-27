@@ -9,7 +9,7 @@ class HeroController {
         if(!isset($_SESSION['hero'])){
             require 'views/home_view.php';
         }else{
-            $hero = new HeroController($_SESSION['hero']);
+            $hero = new HeroController();
             require_once 'views/hero_view.php';
         }
     }
@@ -22,8 +22,7 @@ class HeroController {
             $hero_id = $tab[0]['hero_id'];
             if($hero_id != null){
                 unset($tab);
-                LireDonneesPDO2($db,"SELECT * FROM Hero join Stat using(hero_id) left join Equipement using(hero_id) WHERE hero_id = ".$hero_id, $tab);
-                $this->hero = new Hero($tab[0]['hero_name'], $tab[0]['sta_pv'], $tab[0]['sta_mana'], $tab[0]['sta_strength'], $tab[0]['sta_initiative'], $tab[0]['ite_armor']);
+                $this->hero = new Hero($hero_id);
             }else{
                 $erreur = "Vous n'avez pas d'aventure en cours.";
                 $_SESSION['erreur'] = $erreur;
@@ -36,7 +35,7 @@ class HeroController {
     public function show() {
         echo "<div class='description'>";
         echo "<h2>".$this->hero->getName()."</h3>";
-        echo "<p>".$this->hero->getStats()."</p>";
+        echo "<p>".$this->hero->getStat()."</p>";
         echo "</div>";
     }
 
