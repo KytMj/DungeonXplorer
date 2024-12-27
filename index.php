@@ -89,6 +89,7 @@ $router->addRoute('character', 'CharacterController@index');
 $router->addRoute('herocreation', 'HeroCreationController@index');
 $router->addRoute('adventure', 'AventureController@index');
 $router->addRoute('combat', 'CombatController@index');
+$router->addRoute('inventaire', 'InventoryController@index'); 
 
 //ACTIONS
 

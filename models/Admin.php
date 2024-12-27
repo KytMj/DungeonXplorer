@@ -55,5 +55,4 @@ class Admin extends User{
         echo json_encode($chapter);
         return $chapter;
     }
-
 }

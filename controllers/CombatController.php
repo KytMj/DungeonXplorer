@@ -3,73 +3,83 @@
     require_once "./models/Monster.php";
     include_once "./core/pdo_agile.php";
     include_once "./controllers/HeroController.php";
+    require_once "./controllers/InventoryController.php";
 
 class CombatController{
         private $combat;
         private $curP;
         private $tour = 0;
+        private $inventoryData;
 
-        public function index(){
-            $combatC = new CombatController();
-            if (!isset($_SESSION['curP'])){
-                $combatC->init();
-            }
-            else{
-                $combatC->updateMana($_SESSION['hmana']);
-                if (isset($_SESSION['hpv'])){
-                    $combatC->updatePV($_SESSION['hpv'], $_SESSION['mpv']);
+        public function index() {
+            if (!isset($_SESSION['curP'])) {
+                $this->init();
+            } else {
+                $this->updateMana($_SESSION['hmana']);
+                if (isset($_SESSION['hpv'])) {
+                    $this->updatePV($_SESSION['hpv'], $_SESSION['mpv']);
                 }
             }
-            if ($_SESSION['curP'] == 0){
-                if (isset($_POST['action'])){
-                    if ($_POST['action'] == "hit"){
-                        $combatC->heroPlay();
-                    }
-                    if ($_POST['action'] == "drink"){
-                        $combatC->usePotion(15);
-                    }
-                    if ($_POST['action'] == "fuir"){
-                        $reussite = rand(1,6);
-                        if($reussite >= 3){
-                            $combatC->escape();
+        
+            if ($_SESSION['curP'] == 0) {
+                if (isset($_POST['action'])) {
+                    if ($_POST['action'] == "hit") {
+                        $this->heroPlay();
+                    } elseif ($_POST['action'] == "drink") {
+                        if (!$this->hasPotion()){
+                            echo "Pas de potion dans l'inventaire";
+                        }
+                        $this->usePotion();  
+                        $inventoryController = new InventoryController();
+                        $this->inventoryData = $inventoryController->getInventoryData();
+                        $inventory = $this->inventoryData;
+                        require_once 'views/combat_view.php';
+                    } elseif ($_POST['action'] == "fuir") {
+                        $reussite = rand(1, 6);
+                        if ($reussite >= 3) {
+                            $this->escape();
                         }
                     }
                 }
-                if(isset($_POST['sort'])){
+                if (isset($_POST['sort'])) {
                     $sort = $_POST['sort'];
                     $values = explode("-", $sort);
                     $heal = intval($values[0]);
                     $damage = intval($values[1]);
-                    if($heal != 0 && ($combatC->getHeroMana() - $heal) > 0){
-                        $combatC->usePotion($heal);
-                        $combatC->getCombat()->getHero()->reduceMana($heal);
+        
+                    if ($heal != 0 && ($this->getHeroMana() - $heal) > 0) {
+                        $this->combat->heal($heal);
+                        $this->getCombat()->getHero()->reduceMana($heal);
                     }
-                    if($damage != 0 && ($combatC->getHeroMana() - $damage) > 0){
+                    if ($damage != 0 && ($this->getHeroMana() - $damage) > 0) {
                         $dgt = (rand(1, 6) + rand(1, 6)) + $damage;
-                        $combatC->getCombat()->heroLanceSort($dgt);
-                        $combatC->getCombat()->getHero()->reduceMana($damage);
+                        $this->getCombat()->heroLanceSort($dgt);
+                        $this->getCombat()->getHero()->reduceMana($damage);
                     }
                 }
-                $combatC->monsterPlay();
-            }else{
-                $combatC->monsterPlay();
+            $this->monsterPlay();
+            } else {
+                $this->monsterPlay();
                 $_SESSION['curP'] = 0;
-        
             }
-            $_SESSION['hmana'] = $combatC->getHeroMana();
-            $_SESSION['hpv'] = $combatC->getHeroPV();
-            $_SESSION['mpv'] = $combatC->getMonsterPV();
-            if ($combatC->isEnded()){
-                unset($_SESSION['curP']);
-                unset($_SESSION['hmana']);
-                unset($_SESSION['hpv']);
-                unset($_SESSION['mpv']);
-                unset($_POST['action']);
-                $combatC->isHeroWinner();
+            $_SESSION['hmana'] = $this->getHeroMana();
+            $_SESSION['hpv'] = $this->getHeroPV();
+            $_SESSION['mpv'] = $this->getMonsterPV();
+            if ($this->isEnded()) {
+                unset($_SESSION['curP'], $_SESSION['hmana'], $_SESSION['hpv'], $_SESSION['mpv'], $_POST['action']);
+                $this->isHeroWinner();
                 exit();
             }
+        
+            // inventory data
+            if (!isset($this->inventoryData)) {
+                $inventoryController = new InventoryController();
+                $this->inventoryData = $inventoryController->getInventoryData();
+            }
+            $inventory = $this->inventoryData;
             require_once 'views/combat_view.php';
         }
+        
 
         public function __construct()
         {
@@ -86,6 +96,10 @@ class CombatController{
                 $hero = new Hero($_SESSION['hero']);
             }
             $this->combat = new Combat($monster, $hero);
+
+            $inventoryController = new InventoryController();
+            $this->inventoryData = $inventoryController->getInventoryData();
+            $inventory = $this->inventoryData;
         }
 
         public function init(){
@@ -195,8 +209,43 @@ class CombatController{
             exit();
         }
 
-        public function usePotion($value){
-            $this->combat->heal($value);
+        public function usePotion(){
+            require("./core/Database.php");
+            $query =  $db->prepare( "select Items.ite_id, Items.ite_effects
+                      from Items
+                      join Inventory on Inventory.ite_id = Items.ite_id
+                      where Inventory.hero_id = :hero_id
+                      and Items.ite_type = 'Consomable'
+                      ");
+            $query->bindParam(':hero_id', $_SESSION['hero'], PDO::PARAM_INT);
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+            if ($result){
+                preg_match('/\d+/', $result['ite_effects'], $matches); //extract the numercic value from the effects field
+                if (!empty($matches)){
+                    $potionValue = (int) $matches[0];
+                    $this->combat->heal($potionValue); //drink the potion
+                    $ite_id = $result['ite_id'];
+                    $inventoryController = new InventoryController();
+                    $inventoryController->removeItem($ite_id, 1); //remove the potion from the inventory
+                    /*$this->inventoryData = $inventoryController->getInventoryData();
+                    require_once 'views/inventory_view.php'; //reload the inventory display*/
+                }
+            }
+        }
+
+        public function hasPotion(){
+            require("./core/Database.php");
+            $query = $db->prepare("SELECT COUNT(*) as nb
+                                 FROM Items
+                                 JOIN Inventory ON Inventory.ite_id = Items.ite_id
+                                 WHERE Inventory.hero_id = :hero_id
+                                 AND Items.ite_type = 'Consomable'
+                                 AND Inventory.inven_quantity > 0");
+            $query->bindParam(':hero_id', $_SESSION['hero'], PDO::PARAM_INT);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         }
 }
 ?>
