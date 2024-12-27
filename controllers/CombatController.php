@@ -26,7 +26,14 @@ class CombatController{
                     if ($_POST['action'] == "hit") {
                         $this->heroPlay();
                     } elseif ($_POST['action'] == "drink") {
-                        $this->usePotion(15);
+                        if (!$this->hasPotion()){
+                            echo "Pas de potion dans l'inventaire";
+                        }
+                        $this->usePotion();  
+                        $inventoryController = new InventoryController();
+                        $this->inventoryData = $inventoryController->getInventoryData();
+                        $inventory = $this->inventoryData;
+                        require_once 'views/combat_view.php';
                     } elseif ($_POST['action'] == "fuir") {
                         $reussite = rand(1, 6);
                         if ($reussite >= 3) {
@@ -41,7 +48,7 @@ class CombatController{
                     $damage = intval($values[1]);
         
                     if ($heal != 0 && ($this->getHeroMana() - $heal) > 0) {
-                        $this->usePotion($heal);
+                        $this->combat->heal($heal);
                         $this->getCombat()->getHero()->reduceMana($heal);
                     }
                     if ($damage != 0 && ($this->getHeroMana() - $damage) > 0) {
@@ -50,6 +57,7 @@ class CombatController{
                         $this->getCombat()->getHero()->reduceMana($damage);
                     }
                 }
+            $this->monsterPlay();
             } else {
                 $this->monsterPlay();
                 $_SESSION['curP'] = 0;
@@ -91,6 +99,7 @@ class CombatController{
 
             $inventoryController = new InventoryController();
             $this->inventoryData = $inventoryController->getInventoryData();
+            $inventory = $this->inventoryData;
         }
 
         public function init(){
@@ -200,8 +209,43 @@ class CombatController{
             exit();
         }
 
-        public function usePotion($value){
-            $this->combat->heal($value);
+        public function usePotion(){
+            require("./core/Database.php");
+            $query =  $db->prepare( "select Items.ite_id, Items.ite_effects
+                      from Items
+                      join Inventory on Inventory.ite_id = Items.ite_id
+                      where Inventory.hero_id = :hero_id
+                      and Items.ite_type = 'Consomable'
+                      ");
+            $query->bindParam(':hero_id', $_SESSION['hero'], PDO::PARAM_INT);
+            $query->execute();
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+            if ($result){
+                preg_match('/\d+/', $result['ite_effects'], $matches); //extract the numercic value from the effects field
+                if (!empty($matches)){
+                    $potionValue = (int) $matches[0];
+                    $this->combat->heal($potionValue); //drink the potion
+                    $ite_id = $result['ite_id'];
+                    $inventoryController = new InventoryController();
+                    $inventoryController->removeItem($ite_id, 1); //remove the potion from the inventory
+                    /*$this->inventoryData = $inventoryController->getInventoryData();
+                    require_once 'views/inventory_view.php'; //reload the inventory display*/
+                }
+            }
+        }
+
+        public function hasPotion(){
+            require("./core/Database.php");
+            $query = $db->prepare("SELECT COUNT(*) as nb
+                                 FROM Items
+                                 JOIN Inventory ON Inventory.ite_id = Items.ite_id
+                                 WHERE Inventory.hero_id = :hero_id
+                                 AND Items.ite_type = 'Consomable'
+                                 AND Inventory.inven_quantity > 0");
+            $query->bindParam(':hero_id', $_SESSION['hero'], PDO::PARAM_INT);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         }
 }
 ?>

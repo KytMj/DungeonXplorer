@@ -42,11 +42,15 @@ class InventoryController {
     }
 
     public function addItem($itemId, $quantity) {
-        $this->inventory->add($itemId, $quantity);
+        require("./core/Database.php");
+        $inventoryModel = new Inventory($db, $this->getHeroId($db));
+        $inventoryModel->add($itemId, $quantity);
     }
 
     public function removeItem($itemId, $quantity) {
-        $this->inventory->remove($itemId, $quantity);
+        require("./core/Database.php");
+        $inventoryModel = new Inventory($db, $this->getHeroId($db));
+        $inventoryModel->remove($itemId, $quantity);
     }
 } 
 ?>

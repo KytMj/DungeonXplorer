@@ -53,6 +53,10 @@ class HeroCreationController {
                         majDonneesPDO($db,$sql);
                         unset($sql);
 
+                        $sql = "INSERT into Inventory(hero_id, ite_id, inven_quantity) values (".$hero_id.", 9, 1)";
+                        majDonneesPDO($db,$sql);
+                        unset($sql);
+
                         //SI LES ITEMS SONT CHANGES, UNE ERREUR PEUT ÊTRE CREE ICI
                         $sql = "INSERT into Equipement(hero_id, ite_primaryWeapon, ite_armor) values (".$hero_id.", 3, 12)";
                         majDonneesPDO($db,$sql);

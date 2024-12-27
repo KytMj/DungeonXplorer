@@ -16,6 +16,7 @@
     background-color: #C4975E;
     color: white;
     font-weight: bold;
+    text-align : center;
 }
 
 
