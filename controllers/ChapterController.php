@@ -3,6 +3,8 @@
 // controllers/ChapterController.php
 
 require_once "./models/Chapter.php";
+include_once "./models/Inventory.php";
+include_once "./models/Item.php";
 include_once "./core/pdo_agile.php";
 
 
@@ -11,7 +13,6 @@ class ChapterController
     private $chapters = [];
 
     public function index() {
-        $_SESSION['chapter'] = intval(substr($_SERVER['REQUEST_URI'], -1));
         require_once 'views/chapter_view.php';
     }
     
@@ -39,22 +40,10 @@ class ChapterController
             $chapter['chap_title'],
             $chapter['chap_content'],
             $chapter['chap_image'],
+            $chapter['chap_isCombat'],
             $choices
             );
             
-        }
-    }
-
-    public function show($id)
-    {
-        $chapter = $this->getChapter($id);
-
-        if ($chapter) {
-            include './view/chapter_view.php'; // Charge la vue pour le chapitre
-        } else {
-            // Si le chapitre n'existe pas, redirige vers un chapitre par défaut ou affiche une erreur
-            $_SESSION['erreur'] = "Chapitre non trouvé !";
-            include_once 'views/404.php';
         }
     }
 

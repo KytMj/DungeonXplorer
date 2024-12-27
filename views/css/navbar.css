@@ -1,0 +1,55 @@
+.navBar{
+    display:flex;
+    background-color: #252323;
+}
+
+button{
+    align-self:center;
+    background-color: #C4975E;
+    height: 2em;
+    border-radius: 5px;
+    border: none;
+    font-size: 1vw;
+}
+
+button:hover{
+    background-color: #8B1E1E;
+}
+
+.navBar button{
+    margin: 0.45vh;
+    width: 12em;
+    height: 3em;
+}
+
+#logoNav, #logoNav img{
+    background-color: #252323;
+    align-content: center;
+    text-align: center;
+    max-width: 10%;
+}
+
+#accountNav, #accountNav img{
+    background-color: #252323;
+    align-content: center;
+    text-align: center;
+    min-width: 1.5%;
+    max-width: 10%;
+}
+
+#logoNav img{
+    max-width: 85%;
+    height: auto;
+}
+
+#accountNav img{
+    max-width: 45%;
+    height: auto;
+}
+
+.buttonNav, .buttonNav a{
+    width: 100%;
+    align-content: center;
+    background-color: #252323;
+    text-align: right;
+}

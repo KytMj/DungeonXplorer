@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Inventory</title>
-</head>
-<body>
-    <h1>Inventory</h1>
-    <table border="1">
-        <tr>
-            <th>Item Name</th>
-            <th>Description</th>
-            <th>Quantity</th>
-        </tr>
-        <?php foreach ($items as $item): ?>
-            <tr>
-                <td><?= htmlspecialchars($item['ite_name']); ?></td>
-                <td><?= htmlspecialchars($item['ite_description']); ?></td>
-                <td><?= htmlspecialchars($item['inv_quantity']); ?></td>
-            </tr>
+<?php if (!empty($inventory)): ?>
+    <ul>
+        <?php foreach ($inventory as $item): ?>
+            <li>
+                <strong><?= htmlspecialchars($item['ite_name']) ?> (x<?= htmlspecialchars($item['inven_quantity']) ?>)</strong>
+                <p><?= htmlspecialchars($item['ite_description']) ?></p>
+            </li>
         <?php endforeach; ?>
-    </table>
-</body>
-</html>
+    </ul>
+<?php else: ?>
+    <p>L'inventaire est vide.</p>
+<?php endif; ?>
+        

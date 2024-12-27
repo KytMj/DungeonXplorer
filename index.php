@@ -74,20 +74,39 @@ class Router
 $router = new Router('zRaph');
 
 // Ajout des routes
+//NAVBAR
 $router->addRoute('', 'HomeController@index'); // Pour la racine
 $router->addRoute('home', 'HomeController@index');
+$router->addRoute('adminPanel', 'AdminController@index');
 $router->addRoute('signin', 'AccountCreationController@index');
 $router->addRoute('connexion', 'ConnectionController@index');
+$router->addRoute('accountHero', 'HeroController@index');
+$router->addRoute('account', 'AccountController@index');
+
+//OTHERS PAGES
 $router->addRoute('chapter', 'ChapterController@index');
 $router->addRoute('character', 'CharacterController@index');
 $router->addRoute('herocreation', 'HeroCreationController@index');
 $router->addRoute('adventure', 'AventureController@index');
-$router->addRoute('adventurefight', 'AventureCombatController@index');
-$router->addRoute('account', 'AccountController@index');
+$router->addRoute('combat', 'CombatController@index');
+$router->addRoute('inventaire', 'InventoryController@index'); 
 
-$router->addRoute('addAccount', 'AccountCreationController@inscription');
+//ACTIONS
+
 $router->addRoute('connexionAccount', 'ConnectionController@connexion');
 $router->addRoute('deconnexionAccount', 'ConnectionController@deconnexion');
+
+$router->addRoute('addAccount', 'AccountCreationController@inscription');
+$router->addRoute('modifMailAccount', 'AccountController@modifMail');
+$router->addRoute('modifMDPAccount', 'AccountController@modifMDP');
+$router->addRoute('supprAccountUser', 'AccountController@supprimerCompte');
+
+$router->addRoute('userherocreation', 'HeroCreationController@creation');
+$router->addRoute('herodeletion', 'HeroDeletionController@deletion');
+
+$router->addRoute('supprUser', 'AdminController@supprimerUser');
+
+$router->addRoute('userHeroSuppression', 'AventureController@supprimerHero');
 
 // Appel de la méthode route
 $router->route(trim($_SERVER['REQUEST_URI'], '/'));

@@ -8,14 +8,16 @@ class Chapter
     private $title;
     private $description;
     private $image; 
+    private $isCombat;
     private $choices;
 
-    public function __construct($id, $title, $description, $image, $choices)
+    public function __construct($id, $title, $description, $image, $isCombat, $choices)
     {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->image = $image; 
+        $this->isCombat = $isCombat;
         $this->choices = $choices;
     }
 
@@ -37,6 +39,11 @@ class Chapter
     public function getImage()
     {
         return $this->image; 
+    }
+
+    public function getIsCombat()
+    {
+        return $this->isCombat; 
     }
 
     public function getChoices()
